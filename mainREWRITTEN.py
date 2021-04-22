@@ -79,7 +79,7 @@ async def siemaInterval(ctx):
     await ctx.send("siema")
 
 @client.command(brief = f'Cumil Ślimak')
-async def slimak(ctx, enabled="start",interval = 3600):
+async def slimak(ctx, enabled="start",interval = 30):
     if enabled.lower() == "stop":
         cumilInterval.stop()
     elif enabled.lower() == "start":
@@ -89,6 +89,7 @@ async def slimak(ctx, enabled="start",interval = 3600):
 async def cumilInterval(ctx):
     f = open('slimak.txt',encoding='utf-8')
     huj = f.readlines()
+    await asyncio.sleep(0.01)
     await ctx.send(huj[random.randint(0,len(huj)-1)])
     #await client.get_guild(338268917497856001).get_channel(706908751424258128).send("Test")
 
