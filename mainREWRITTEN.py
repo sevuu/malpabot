@@ -67,7 +67,7 @@ async def cencrypt(ctx, shift,*,msg):
 async def cdecrypt(ctx, shift,*,msg):
     await ctx.channel.send(caesarcipher.cipher_decrypt(msg,int(shift)))
 
-@client.command(brief = ":D")
+@client.command(brief = "test")
 async def dmtest(ctx, uid,*,msg):
     user = await client.fetch_user(uid)
     channel = await user.create_dm()
