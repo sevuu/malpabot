@@ -17,6 +17,9 @@ client = commands.Bot(command_prefix = prefix)
 async def on_ready():
     print('dzialam kurwa {0.user}\nhttps://discord.com/oauth2/authorize?client_id=811696300285362207&scope=bot&permissions=0'.format(client))
     await client.change_presence(status=discord.Status.online, activity=discord.Game(f'piwko :)), {prefix}help'))
+    user = await client.fetch_user('252217902202093568')
+    channel = await user.create_dm()
+    await channel.send("Działam")
 
 @client.command(brief = "Pong")
 async def ping(ctx):
