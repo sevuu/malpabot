@@ -60,11 +60,11 @@ async def sum(ctx, x, y):
         await ctx.channel.send("To nie są poprawne liczby!")
 
 @client.command(brief = "Szyfruje wiadomość szyfrem cezara")
-async def caesarencrypt(ctx, shift,*,msg):
+async def cencrypt(ctx, shift,*,msg):
     await ctx.channel.send(caesarcipher.cipher_encrypt(msg,int(shift)))
 
 @client.command(brief = "Odszyfrowuje wiadomość napisaną szyfrem cezara")
-async def caesardecrypt(ctx, shift,*,msg):
+async def cdecrypt(ctx, shift,*,msg):
     await ctx.channel.send(caesarcipher.cipher_decrypt(msg,int(shift)))
 
 @client.command(brief = ":D")
