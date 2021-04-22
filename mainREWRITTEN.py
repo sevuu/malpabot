@@ -4,14 +4,13 @@ from discord import message, FFmpegPCMAudio
 from discord.ext import commands, tasks
 from discord.ext.commands import Bot
 from discord.voice_client import VoiceClient
-from hentai import Hentai, Format #:tf: :tf:
+from hentai import Hentai, Format
 from translate import Translator
 
 
 prefix = '%'
 client = commands.Bot(command_prefix = prefix)
 
-#await client.get_guild(338268917497856001).get_channel(706908751424258128).send("Test")
 
 @client.event
 async def on_ready():
@@ -60,6 +59,12 @@ async def sum(ctx, x, y):
     except:
         await ctx.channel.send("To nie są poprawne liczby!")
 
+@client.command(brief = ":D")
+async def dmtest(ctx, uid,*,msg):
+    user = await client.fetch_user(uid)
+    channel = await user.create_dm()
+    await channel.send(msg)
+
 @client.command(brief="Wynik z odejmowania")
 async def subt(ctx, x, y):
     try:
@@ -88,11 +93,11 @@ async def slimak(ctx, enabled="start",interval = 5):
     elif enabled.lower() == "start":
         cumilInterval.change_interval(seconds = int(interval))
         cumilInterval.start(ctx)
-@tasks.loop(seconds=5)
+@tasks.loop(seconds=3599)
 async def cumilInterval(ctx):
     f = open('slimak.txt',encoding='utf-8')
     slimakhuj = f.readlines()
-    await asyncio.sleep(0.01)   #nie wiem po co to tu w sumie dałem ale dla pewności zostawie bo czemu nie
+    # await asyncio.sleep(0.01)   #nie wiem po co to tu w sumie dałem ale dla pewności zostawie bo czemu nie
     randomslimak = random.randint(0,len(slimakhuj)-1)
     await ctx.send(slimakhuj[randomslimak])
     #await client.get_guild(338268917497856001).get_channel(706908751424258128).send("Test")
