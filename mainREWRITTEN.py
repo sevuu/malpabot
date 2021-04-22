@@ -87,13 +87,13 @@ async def siemaInterval(ctx):
     await ctx.send("siema")
 
 @client.command(brief = f'Cumil Ślimak')
-async def slimak(ctx, enabled="start",interval = 5):
+async def slimak(ctx, enabled="start",interval = 3599):
     if enabled.lower() == "stop":
         cumilInterval.stop()
     elif enabled.lower() == "start":
         cumilInterval.change_interval(seconds = int(interval))
         cumilInterval.start(ctx)
-@tasks.loop(seconds=3599)
+@tasks.loop(seconds=5)
 async def cumilInterval(ctx):
     f = open('slimak.txt',encoding='utf-8')
     slimakhuj = f.readlines()
