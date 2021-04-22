@@ -125,16 +125,16 @@ async def id(ctx):
         embed.set_footer(text="ID: "+str(ctx.message.author.id))
         await ctx.send(embed=embed)
 
-@client.command(pass_context=True, brief="Dołącza do kanału i to w sumie tyle")
-async def join(ctx):
-    channel = ctx.author.voice.channel
-    voice = await channel.connect()
-    source = FFmpegPCMAudio('cwel.mp3')
-    player = voice.play(source)
+#@client.command(pass_context=True, brief="Dołącza do kanału i to w sumie tyle")
+#async def join(ctx):
+#    channel = ctx.author.voice.channel
+#    voice = await channel.connect()
+#    source = FFmpegPCMAudio('cwel.mp3')
+#    player = voice.play(source)
 
-@client.command(brief="Wychodzi z kanału")
-async def dc(ctx):
-    await ctx.voice_client.disconnect()
+#@client.command(brief="Wychodzi z kanału")
+#async def dc(ctx):
+#    await ctx.voice_client.disconnect()
 
 @client.command(brief='Zmienia nick czy cos idk')
 async def nick(ctx, member: discord.Member,*, nick):
