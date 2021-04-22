@@ -172,7 +172,7 @@ async def starzygabrysia(ctx):
 async def roll(ctx,a,b):
     await ctx.send(str(random.randint(int(a),int(b))))
 
-@client.command(brief="Randomowa strona nhentai do id 355686")
+@client.command(brief="Randomowa strona nhentai do id 355686 :)")
 async def nhentai(ctx):
     FBI = True
     while FBI:
