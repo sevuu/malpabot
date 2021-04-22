@@ -125,6 +125,18 @@ async def id(ctx):
         embed.set_footer(text="ID: "+str(ctx.message.author.id))
         await ctx.send(embed=embed)
 
+@client.command(brief = f"Twój avatar (bezużyteczne bo {prefix}id istnieje)")
+async def avatar(ctx):
+    if len(ctx.message.mentions)>0:
+        embed=discord.Embed(title="avatar "+str(ctx.message.mentions[0]), color=0xFF5733)
+        embed.set_image(url = ctx.message.mentions[0].avatar_url)
+        await ctx.send(embed=embed)
+    else:
+        embed=discord.Embed(title=ctx.author.display_name, description="twój avatar", color=0xff0000)
+        embed.set_image(url = ctx.author.avatar_url)
+        await ctx.send(embed=embed)
+
+
 #@client.command(pass_context=True, brief="Dołącza do kanału i to w sumie tyle")
 #async def join(ctx):
 #    channel = ctx.author.voice.channel
@@ -141,11 +153,7 @@ async def nick(ctx, member: discord.Member,*, nick):
     await member.edit(nick=nick)
     await ctx.send(f'Zmieniono nick {member} na: {member.mention} ')
 
-@client.command(brief = f"Twój avatar (bezużyteczne bo {prefix}id istnieje)")
-async def avatar(ctx):
-    embed=discord.Embed(title=ctx.author.display_name, description="twój avatar", color=0xff0000)
-    embed.set_image(url = ctx.author.avatar_url)
-    await ctx.send(embed=embed)
+
 
 @client.command(brief="IQ Szymona")
 async def iqsobiego(ctx):
