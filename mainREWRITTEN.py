@@ -150,6 +150,12 @@ async def id(ctx):
         embed.set_footer(text="ID: "+str(ctx.message.author.id))
         await ctx.send(embed=embed)
 
+# @client.command(brief = f"gej")
+# async def test(ctx):
+    
+#     elif ctx.message.author.id == 252217902202093568:
+#         await ctx.send("sperma")
+
 @client.command(brief = f"Twój avatar (bezużyteczne bo {prefix}id istnieje)")
 async def avatar(ctx):
     if len(ctx.message.mentions)>0:
@@ -224,6 +230,7 @@ async def nhentai(ctx):
         else:
             continue
 
+
 @client.command(brief="Mój kolega :)")
 async def czechu(ctx):
     await ctx.channel.send('<@327742627233398784>')
@@ -235,10 +242,13 @@ async def ligalegend(ctx):
 @client.command(brief="Usuwa x wiadomości")
 @has_permissions(manage_messages=True)
 async def clear(ctx,amount=1):
-    if amount <= 3: 
-        await ctx.channel.purge(limit=amount+1)
+    if ctx.message.author.id == 328989571947823104:
+        if amount <= 20: 
+            await ctx.channel.purge(limit=amount+1)
+        else:
+            await ctx.channel.send('pojebalo cie chyba')
     else:
-        await ctx.channel.send('pierdol sie')
+        ctx.channel.send("nie jestes dababy pierdol sei")
 
 @client.command(brief="Status komend używających plików")
 async def filestatus(ctx):
