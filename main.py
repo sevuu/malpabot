@@ -25,7 +25,7 @@ async def ping(ctx):
     await ctx.channel.send(f'Pong! ({round(client.latency*1000)}ms)')
 
 
-@client.command(brief = "super quiz :)")
+@client.command(brief = "super quiz :)", description = "bajerancki quizior :D")
 async def quiz(ctx):
     los = random.randint(0,9)
     f = open(f'./cyfry/{los}.png', 'rb')
