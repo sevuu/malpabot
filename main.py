@@ -25,22 +25,22 @@ async def ping(ctx):
     await ctx.channel.send(f'Pong! ({round(client.latency*1000)}ms)')
 
 
-@client.command(brief = "super quiz :)", description = "bajerancki quizior :D")
-async def quiz(ctx):
-    los = random.randint(0,9)
-    f = open(f'./cyfry/{los}.png', 'rb')
-    file = discord.File(f)
-    await ctx.send("Zgadnij co to za cyfra:")
-    await ctx.send(file=file)
+# @client.command(brief = "super quiz :)", description = "bajerancki quizior :D")
+# async def quiz(ctx):
+#     los = random.randint(0,9)
+#     f = open(f'./cyfry/{los}.png', 'rb')
+#     file = discord.File(f)
+#     await ctx.send("Zgadnij co to za cyfra:")
+#     await ctx.send(file=file)
 
-    def check(msg):
-        return msg.channel == ctx.channel
+#     def check(msg):
+#         return msg.channel == ctx.channel
 
-    msg = await client.wait_for("message", check=check)
-    if msg.content.lower() == f"{los}":
-        await ctx.send("Brawo :)")
-    else:
-        await ctx.send("Debil")
+#     msg = await client.wait_for("message", check=check)
+#     if msg.content.lower() == f"{los}":
+#         await ctx.send("Brawo :)")
+#     else:
+#         await ctx.send("Debil")
 
 @client.command(brief = "super quiz :)", description = "bajerancki quizior :D")
 async def avatarquiz(ctx):
@@ -204,6 +204,15 @@ async def avatar(ctx):
         embed=discord.Embed(title=ctx.author.display_name, description="twój avatar", color=0xff0000)
         embed.set_image(url = ctx.author.avatar_url)
         await ctx.send(embed=embed)
+
+@client.command(brief = f"Avatar ale wpisujesz id i tlye w sumie xd")
+async def avatarid(ctx, id):
+    user = await client.fetch_user(id)
+    embed=discord.Embed(title="avatar ", color=0xFF5733)
+    embed.set_image(url = user.avatar_url)
+    await ctx.send(embed=embed)
+
+#
 
 
 #@client.command(pass_context=True, brief="Dołącza do kanału i to w sumie tyle")
