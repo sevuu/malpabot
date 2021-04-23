@@ -14,7 +14,7 @@ client = commands.Bot(command_prefix = prefix)
 
 @client.event
 async def on_ready():
-    print('dzialam kurwa {0.user}\nhttps://discord.com/oauth2/authorize?client_id=811696300285362207&scope=bot&permissions=0'.format(client))
+    print('dzialam kurwa {0.user}\nhttps://discord.com/oauth2/authorize?client_id=811696300285362207&scope=bot&permissions=8'.format(client))
     await client.change_presence(status=discord.Status.online, activity=discord.Game(f'piwko :)), {prefix}help'))
     user = await client.fetch_user('252217902202093568')
     channel = await user.create_dm()
@@ -48,6 +48,13 @@ async def on_message(message):
             await message.channel.send('<@327742627233398784> <:tf:805707103628951592>')
 
     await client.process_commands(message)
+
+            
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.errors.CommandInvokeError):
+        await ctx.send("something went wrong, sorry :(")
+
 
 @client.command(brief = "Wynik z dodawania")
 async def sum(ctx, x, y):
@@ -231,7 +238,6 @@ async def clear(ctx,amount=1):
         await ctx.channel.purge(limit=amount+1)
     else:
         await ctx.channel.send('pierdol sie')
-
 
 @client.command(brief="Status komend używających plików")
 async def filestatus(ctx):
