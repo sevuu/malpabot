@@ -242,7 +242,7 @@ async def ligalegend(ctx):
 @client.command(brief="Usuwa x wiadomości")
 @has_permissions(manage_messages=True)
 async def clear(ctx,amount=1):
-    if ctx.message.author.id == 328989571947823104:
+    if ctx.message.author.id == 328989571947823104 or ctx.message.author.id == 252217902202093568:
         if amount <= 20: 
             await ctx.channel.purge(limit=amount+1)
         else:
