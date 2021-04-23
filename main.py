@@ -45,7 +45,7 @@ async def quiz(ctx):
 @client.command(brief = "super quiz :)", description = "bajerancki quizior :D")
 async def avatarquiz(ctx):
     avatary = ['nadeko','rodi','rythm']
-    los = random.randint(0,9)
+    los = random.randint(0,len(avatary)-1)
     f = open(f'./avatar/{avatary[los]}.png', 'rb')
     file = discord.File(f)
     await ctx.send("Zgadnij czyj to avatar:")
