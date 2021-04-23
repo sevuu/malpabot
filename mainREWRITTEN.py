@@ -249,10 +249,9 @@ async def filestatus(ctx):
     f2.close()
     await ctx.channel.send(f'iq: {content}; starzy: {content2}')
 
-@client.command(brief=":tf:")
-async def pong(ctx):
-    await ctx.send(f"{ctx.message.guild.default_role}  <:tf:805707103628951592>")
-
+# @client.command(brief=":tf:")
+# async def pong(ctx):
+#     await ctx.send(f"{ctx.message.guild.default_role}  <:tf:805707103628951592>")
 
 @client.command(brief="Losowy fakt")
 async def randomfact(ctx):
