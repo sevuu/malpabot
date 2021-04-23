@@ -1,8 +1,10 @@
 import discord, random, asyncio, caesarcipher
+
+from discord.ext.commands.errors import BotMissingPermissions, MissingPermissions
 from discord import voice_client
 from discord import message, FFmpegPCMAudio
 from discord.ext import commands, tasks
-from discord.ext.commands import Bot
+from discord.ext.commands import Bot, has_permissions
 from discord.voice_client import VoiceClient
 from hentai import Hentai, Format
 from translate import Translator
@@ -224,12 +226,18 @@ async def nhentai(ctx):
 async def ligalegend(ctx):
     await ctx.channel.send('Liga Legend to kurwa, nie graj w to')
 
-# @client.command(brief="Usuwa x wiadomości")
-# async def clear(ctx,amount=1):
-#     if amount <= 20: 
-#         await ctx.channel.purge(limit=amount+1)
-#     else:
-#         await ctx.channel.send('pierdol sie')
+@client.command(brief="Usuwa x wiadomości")
+@has_permissions(manage_messages=True)
+async def clear(ctx,amount=1):
+    if amount <= 20: 
+        await ctx.channel.purge(limit=amount+1)
+    else:
+        await ctx.channel.send('pierdol sie')
+
+@clear.error
+async def clear_error(error, ctx):
+   if isinstance(error, MissingPermissions):
+       await ctx.send("chuju nie mozesz")
 
 @client.command(brief="Status komend używających plików")
 async def filestatus(ctx):
