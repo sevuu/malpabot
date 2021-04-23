@@ -34,7 +34,7 @@ async def quiz(ctx):
     await ctx.send(file=file)
 
     def check(msg):
-        return msg.author == ctx.author and msg.channel == ctx.channel
+        return msg.channel == ctx.channel
 
     msg = await client.wait_for("message", check=check)
     if msg.content.lower() == f"{los}":
