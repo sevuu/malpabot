@@ -42,6 +42,25 @@ async def quiz(ctx):
     else:
         await ctx.send("Debil")
 
+@client.command(brief = "super quiz :)", description = "bajerancki quizior :D")
+async def avatarquiz(ctx):
+    avatary = ['nadeko','rodi','rythm']
+    los = random.randint(0,9)
+    f = open(f'./avatar/{avatary[los]}.png', 'rb')
+    file = discord.File(f)
+    await ctx.send("Zgadnij czyj to avatar:")
+    await ctx.send(file=file)
+
+    def check(msg):
+        return msg.channel == ctx.channel
+
+    msg = await client.wait_for("message", check=check)
+    if msg.content.lower() == f"{los}":
+        await ctx.send("Brawo :)")
+    else:
+        await ctx.send("Debil")
+
+
 # @client.command(brief = "Oznacza Gabrysia 6 razy co 2 sekundy")
 # async def oznaczczecha(ctx):
 #     for i in range(0,6):
