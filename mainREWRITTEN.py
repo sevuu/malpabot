@@ -198,7 +198,8 @@ async def starzygabrysia(ctx):
     f = open("starzy.txt","w")
     f.write(str(content))
     f.close()
-    await ctx.send(f'<@327742627233398784> ma {content} ojców')
+    # await ctx.send(f'<@327742627233398784> ma {content} ojców')
+    await ctx.send("Gabryś ma {content} ojców")
 
 
 @client.command(brief="Losuje randomową liczbę w wybranym zakresie")
