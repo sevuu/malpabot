@@ -191,7 +191,7 @@ async def starzygabrysia(ctx):
     f = open("starzy.txt","w")
     f.write(str(content))
     f.close()
-    await ctx.send(f'Gabryś ma {content} ojców')
+    await ctx.send(f'<@327742627233398784> ma {content} ojców')
 
 
 @client.command(brief="Losuje randomową liczbę w wybranym zakresie")
@@ -216,9 +216,9 @@ async def nhentai(ctx):
         else:
             continue
 
-# @client.command(brief="Mój kolega :)")
-# async def czechu(ctx):
-#     await ctx.channel.send('<@327742627233398784>')
+@client.command(brief="Mój kolega :)")
+async def czechu(ctx):
+    await ctx.channel.send('<@327742627233398784>')
 
 @client.command(brief="Gra komputerowa")
 async def ligalegend(ctx):
