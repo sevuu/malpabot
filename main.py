@@ -47,7 +47,7 @@ async def avatarquiz(ctx):
     avatary = os.listdir('avatar')
     los = random.randint(0,len(avatary)-1)
     filename = avatary[los]
-    f = open(f'./avatar/{filename[:-3]}.png', 'rb')
+    f = open(f'./avatar/{filename[:-4]}.png', 'rb')
     file = discord.File(f)
     await ctx.send("Zgadnij czyj to avatar:")
     await ctx.send(file=file)
