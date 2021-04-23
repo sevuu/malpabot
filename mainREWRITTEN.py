@@ -24,11 +24,11 @@ async def on_ready():
 async def ping(ctx):
     await ctx.channel.send(f'Pong! ({round(client.latency*1000)}ms)')
 
-@client.command(brief = "Oznacza Gabrysia 6 razy co 2 sekundy")
-async def oznaczczecha(ctx):
-    for i in range(0,6):
-        await ctx.channel.send('<@327742627233398784>')
-        await asyncio.sleep(2)
+# @client.command(brief = "Oznacza Gabrysia 6 razy co 2 sekundy")
+# async def oznaczczecha(ctx):
+#     for i in range(0,6):
+#         await ctx.channel.send('<@327742627233398784>')
+#         await asyncio.sleep(2)
 
 @client.command(brief = "MMA Fighter")
 async def zagus(ctx):
@@ -42,18 +42,18 @@ async def on_message(message):
     if message.content.startswith("sobi"):
         await message.channel.send('łysol')
 
-    if 'kurwa' in message.content:
-        los = random.randint(0,100)
-        if los <= 25:
-            await message.channel.send('<@327742627233398784> <:tf:805707103628951592>')
+    # if 'kurwa' in message.content:
+    #     los = random.randint(0,100)
+    #     if los <= 25:
+    #         await message.channel.send('<@327742627233398784> <:tf:805707103628951592>')
 
     await client.process_commands(message)
 
             
-@client.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.errors.CommandInvokeError):
-        await ctx.send("something went wrong, sorry :(")
+# @client.event
+# async def on_command_error(ctx, error):
+#     if isinstance(error, commands.errors.CommandInvokeError):
+#         await ctx.send("cos sie zepsuło :(")
 
 
 @client.command(brief = "Wynik z dodawania")
