@@ -11,16 +11,6 @@ from translate import Translator
 prefix = '%'
 client = commands.Bot(command_prefix = prefix)
 
-# def check(msg):
-#         return msg.author == ctx.author and msg.channel == ctx.channel and \
-#         msg.content.lower() in ["y", "n"]
-
-#     msg = await client.wait_for("message", check=check)
-#     if msg.content.lower() == "y":
-#         await ctx.send("You said yes!")
-#     else:
-#         await ctx.send("You said no!")
-
 
 @client.event
 async def on_ready():

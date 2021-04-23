@@ -1,1 +1,1 @@
-worker: python mainREWRITTEN.py
+worker: python main.py
