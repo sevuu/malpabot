@@ -56,7 +56,7 @@ async def avatarquiz(ctx):
         return msg.channel == ctx.channel
 
     msg = await client.wait_for("message", check=check)
-    if msg.content.lower() == f"{avatary[los]}":
+    if msg.content.lower() == f"{filename[:-4]}":
         await ctx.send("Brawo :)")
     else:
         await ctx.send("Debil")
