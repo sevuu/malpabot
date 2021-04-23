@@ -15,7 +15,7 @@ client = commands.Bot(command_prefix = prefix)
 @client.event
 async def on_ready():
     print('dzialam kurwa {0.user}\nhttps://discord.com/oauth2/authorize?client_id=811696300285362207&scope=bot&permissions=8'.format(client))
-    await client.change_presence(status=discord.Status.online, activity=discord.Game(f'piwko :)), {prefix}help'))
+    await client.change_presence(status=discord.Status.online, activity=discord.Game(f'piwko :)) | {prefix}help'))
     user = await client.fetch_user('252217902202093568')
     channel = await user.create_dm()
     await channel.send("Działam")
@@ -248,6 +248,11 @@ async def filestatus(ctx):
     f.close()
     f2.close()
     await ctx.channel.send(f'iq: {content}; starzy: {content2}')
+
+@client.command(brief=":tf:")
+async def pong(ctx):
+    await ctx.send(f"{ctx.message.guild.default_role}  <:tf:805707103628951592>")
+
 
 @client.command(brief="Losowy fakt")
 async def randomfact(ctx):
