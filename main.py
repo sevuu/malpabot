@@ -1,4 +1,4 @@
-import discord, random, asyncio, caesarcipher
+import discord, random, asyncio, caesarcipher, os
 from discord import voice_client
 from discord import message, FFmpegPCMAudio
 from discord.ext import commands, tasks
@@ -44,9 +44,10 @@ async def quiz(ctx):
 
 @client.command(brief = "super quiz :)", description = "bajerancki quizior :D")
 async def avatarquiz(ctx):
-    avatary = ['nadeko','rodi','rythm']
+    avatary = os.listdir('avatar')
     los = random.randint(0,len(avatary)-1)
-    f = open(f'./avatar/{avatary[los]}.png', 'rb')
+    filename = avatary[los]
+    f = open(f'./avatar/{filename[:-3]}.png', 'rb')
     file = discord.File(f)
     await ctx.send("Zgadnij czyj to avatar:")
     await ctx.send(file=file)
