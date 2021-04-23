@@ -212,7 +212,17 @@ async def avatarid(ctx, id):
     embed.set_image(url = user.avatar_url)
     await ctx.send(embed=embed)
 
-#
+@client.command(brief = f"Ankieta")
+async def poll(ctx, a, b):
+    emojis = ['\U0001F1E6','\U0001F1E7']
+    embed=discord.Embed(title="Ankieta", description=f"{a} czy {b}")
+    embed.add_field(name=f"{a}", value=":regional_indicator_a:  ", inline=True)
+    embed.add_field(name=f"{b}", value=":regional_indicator_b:  ", inline=True)
+    embed.set_footer(text=f"pool by: {ctx.author}")
+    msg = await ctx.send(embed=embed)
+    for emoji in emojis:
+        await message.Message.add_reaction(msg, emoji)
+        await asyncio.sleep(0.5)
 
 
 #@client.command(pass_context=True, brief="Dołącza do kanału i to w sumie tyle")
