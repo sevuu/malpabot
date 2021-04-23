@@ -1,6 +1,4 @@
 import discord, random, asyncio, caesarcipher
-
-from discord.ext.commands.errors import BotMissingPermissions, MissingPermissions
 from discord import voice_client
 from discord import message, FFmpegPCMAudio
 from discord.ext import commands, tasks
@@ -234,10 +232,6 @@ async def clear(ctx,amount=1):
     else:
         await ctx.channel.send('pierdol sie')
 
-@clear.error
-async def clear_error(error, ctx):
-   if isinstance(error, MissingPermissions):
-       await ctx.send("chuju nie mozesz")
 
 @client.command(brief="Status komend używających plików")
 async def filestatus(ctx):
