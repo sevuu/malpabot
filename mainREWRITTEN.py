@@ -11,6 +11,16 @@ from translate import Translator
 prefix = '%'
 client = commands.Bot(command_prefix = prefix)
 
+# def check(msg):
+#         return msg.author == ctx.author and msg.channel == ctx.channel and \
+#         msg.content.lower() in ["y", "n"]
+
+#     msg = await client.wait_for("message", check=check)
+#     if msg.content.lower() == "y":
+#         await ctx.send("You said yes!")
+#     else:
+#         await ctx.send("You said no!")
+
 
 @client.event
 async def on_ready():
@@ -18,11 +28,29 @@ async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=discord.Game(f'piwko :)) | {prefix}help'))
     user = await client.fetch_user('252217902202093568')
     channel = await user.create_dm()
-    await channel.send("Działam")
+    await channel.send("Dziala")
 
 @client.command(brief = "Pong")
 async def ping(ctx):
     await ctx.channel.send(f'Pong! ({round(client.latency*1000)}ms)')
+
+
+@client.command(brief = "super quiz :)")
+async def quiz(ctx):
+    los = random.randint(0,9)
+    f = open(f'.\\cyfry\\{los}.png', 'rb')
+    file = discord.File(f)
+    await ctx.send("Zgadnij co to za cyfra:")
+    await ctx.send(file=file)
+
+    def check(msg):
+        return msg.author == ctx.author and msg.channel == ctx.channel
+
+    msg = await client.wait_for("message", check=check)
+    if msg.content.lower() == f"{los}":
+        await ctx.send("Brawo :)")
+    else:
+        await ctx.send("Debil")
 
 # @client.command(brief = "Oznacza Gabrysia 6 razy co 2 sekundy")
 # async def oznaczczecha(ctx):
@@ -66,7 +94,7 @@ async def sum(ctx, x, y):
     except:
         await ctx.channel.send("To nie są poprawne liczby!")
 
-@client.command(brief = "Szyfruje wiadomość szyfrem cezara")
+@client.command(brief = "Szyfruje wiadomość szyfrem cezara", )
 async def cencrypt(ctx, shift,*,msg):
     await ctx.channel.send(caesarcipher.cipher_encrypt(msg,int(shift)))
 
