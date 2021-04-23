@@ -253,6 +253,7 @@ async def filestatus(ctx):
 # async def pong(ctx):
 #     await ctx.send(f"{ctx.message.guild.default_role}  <:tf:805707103628951592>")
 
+
 @client.command(brief="Losowy fakt")
 async def randomfact(ctx):
     facts =["wojtek to calkiem gejowe imie",
