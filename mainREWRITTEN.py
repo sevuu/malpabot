@@ -235,7 +235,7 @@ async def ligalegend(ctx):
 @client.command(brief="Usuwa x wiadomości")
 @has_permissions(manage_messages=True)
 async def clear(ctx,amount=1):
-    if amount <= 20: 
+    if amount <= 3: 
         await ctx.channel.purge(limit=amount+1)
     else:
         await ctx.channel.send('pierdol sie')
