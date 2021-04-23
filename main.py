@@ -213,9 +213,9 @@ async def avatarid(ctx, id):
     await ctx.send(embed=embed)
 
 @client.command(brief = f"Ankieta")
-async def poll(ctx, string, a, b):
+async def poll(ctx, a, b):
     emojis = ['\U0001F1E6','\U0001F1E7']
-    embed=discord.Embed(title="Ankieta", description=f"{string}")
+    embed=discord.Embed(title="Ankieta", description=f"{a} czy {b}")
     embed.add_field(name=f"{a}", value=":regional_indicator_a:  ", inline=True)
     embed.add_field(name=f"{b}", value=":regional_indicator_b:  ", inline=True)
     embed.set_footer(text=f"pool by: {ctx.author}")
