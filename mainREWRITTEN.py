@@ -38,7 +38,7 @@ async def ping(ctx):
 @client.command(brief = "super quiz :)")
 async def quiz(ctx):
     los = random.randint(0,9)
-    f = open(f'.\\cyfry\\{los}.png', 'rb')
+    f = open(f'./cyfry/{los}.png', 'rb')
     file = discord.File(f)
     await ctx.send("Zgadnij co to za cyfra:")
     await ctx.send(file=file)
