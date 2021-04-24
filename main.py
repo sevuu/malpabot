@@ -213,7 +213,7 @@ async def avatarid(ctx, id):
     await ctx.send(embed=embed)
 
 @client.command(brief = f"Ankieta")
-async def poll(ctx, a, b, c=None, d=None, e=None, f=None):
+async def poll(ctx, a, b=None, c=None, d=None, e=None, f=None):
     emojis = ['\U0001F1E6','\U0001F1E7']
     mytitle = f'{a} czy {b}' 
     if b == None:
