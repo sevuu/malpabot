@@ -214,18 +214,27 @@ async def avatarid(ctx, id):
 
 @client.command(brief = f"Ankieta")
 async def poll(ctx, a, b, c=None, d=None, e=None, f=None):
-    emojis = ['\U0001F1E6','\U0001F1E7','\U0001F1E8','\U0001F1E9','🇪','🇫',]
-    embed=discord.Embed(title="Ankieta", description=f"{a} czy {b}")
+    emojis = ['\U0001F1E6','\U0001F1E7']
+    mytitle = f'{a} czy {b}'
+    embed=discord.Embed(title="Ankieta", description=mytitle)
     embed.add_field(name=f"{a}", value=":regional_indicator_a:  ", inline=True)
     embed.add_field(name=f"{b}", value=":regional_indicator_b:  ", inline=True)
     if c != None:
         embed.add_field(name=f"{c}", value=":regional_indicator_c:  ", inline=True)
+        emojis.append('\U0001F1E8')
+        mytitle = mytitle + f' czy {c}'
     if d != None:
         embed.add_field(name=f"{d}", value=":regional_indicator_d:  ", inline=True)
+        emojis.append('\U0001F1E9')
+        mytitle = mytitle + f' czy {d}'
     if e != None:
         embed.add_field(name=f"{e}", value=":regional_indicator_e:  ", inline=True)
+        emojis.append('🇪')
+        mytitle = mytitle + f' czy {e}'
     if f != None:
         embed.add_field(name=f"{f}", value=":regional_indicator_f:  ", inline=True)
+        emojis.append('🇫')
+        mytitle = mytitle + f' czy {f}'
     embed.set_footer(text=f"pool by: {ctx.author}")
     msg = await ctx.send(embed=embed)
     for emoji in emojis:
