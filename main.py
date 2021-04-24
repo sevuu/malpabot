@@ -153,8 +153,8 @@ async def cumilInterval(ctx):
     # await asyncio.sleep(0.01)   #nie wiem po co to tu w sumie dałem ale dla pewności zostawie bo czemu nie
     randomslimak = random.randint(0,len(slimakhuj)-1)
     await ctx.send(slimakhuj[randomslimak])
-    #await client.get_guild(338268917497856001).get_channel(706908751424258128).send("Test")
 
+    #await client.get_guild(338268917497856001).get_channel(706908751424258128).send("Test")
 
 @client.command(brief="Pokazuje informacje o Tobie albo o oznaczonej osobie")
 async def id(ctx):
@@ -213,11 +213,19 @@ async def avatarid(ctx, id):
     await ctx.send(embed=embed)
 
 @client.command(brief = f"Ankieta")
-async def poll(ctx, a, b):
+async def poll(ctx, a, b, c=None, d=None, e=None, f=None):
     emojis = ['\U0001F1E6','\U0001F1E7']
     embed=discord.Embed(title="Ankieta", description=f"{a} czy {b}")
     embed.add_field(name=f"{a}", value=":regional_indicator_a:  ", inline=True)
     embed.add_field(name=f"{b}", value=":regional_indicator_b:  ", inline=True)
+    if c != None:
+        embed.add_field(name=f"{c}", value=":regional_indicator_c:  ", inline=True)
+    if d != None:
+        embed.add_field(name=f"{d}", value=":regional_indicator_d:  ", inline=True)
+    if e != None:
+        embed.add_field(name=f"{e}", value=":regional_indicator_e:  ", inline=True)
+    if f != None:
+        embed.add_field(name=f"{f}", value=":regional_indicator_f:  ", inline=True)
     embed.set_footer(text=f"pool by: {ctx.author}")
     msg = await ctx.send(embed=embed)
     for emoji in emojis:
@@ -241,8 +249,6 @@ async def nick(ctx, member: discord.Member,*, nick):
     await member.edit(nick=nick)
     await ctx.send(f'Zmieniono nick {member} na: {member.mention} ')
 
-
-
 @client.command(brief="IQ Szymona")
 async def iqsobiego(ctx):
     f = open("iq.txt","r")
@@ -261,7 +267,6 @@ async def starzygabrysia(ctx):
     f = open("starzy.txt","w")
     f.write(str(content))
     f.close()
-    # await ctx.send(f'<@327742627233398784> ma {content} ojców')
     await ctx.send("Gabryś ma {content} ojców")
 
 
@@ -320,7 +325,6 @@ async def filestatus(ctx):
 # @client.command(brief=":tf:")
 # async def pong(ctx):
 #     await ctx.send(f"{ctx.message.guild.default_role}  <:tf:805707103628951592>")
-
 
 @client.command(brief="Losowy fakt")
 async def randomfact(ctx):
