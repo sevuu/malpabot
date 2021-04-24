@@ -229,7 +229,7 @@ async def poll(ctx, a, b=None, c=None, d=None, e=None, f=None):
     embed=discord.Embed(title="Ankieta", description=mytitle)
     embed.add_field(name=f"{a}", value=":regional_indicator_a:  ", inline=True)
     if b != None:
-        embed.add_field(name=f"{c}", value=":regional_indicator_b:  ", inline=True)
+        embed.add_field(name=f"{b}", value=":regional_indicator_b:  ", inline=True)
         emojis.append('\U0001F1E7')
     if c != None:
         embed.add_field(name=f"{c}", value=":regional_indicator_c:  ", inline=True)
