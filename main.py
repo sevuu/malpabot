@@ -215,9 +215,10 @@ async def avatarid(ctx, id):
 @client.command(brief = f"Ankieta")
 async def poll(ctx, a, b=None, c=None, d=None, e=None, f=None):
     emojis = ['\U0001F1E6']
-    mytitle = f'{a} czy {b}' 
     if b == None:
         ctx.send("podaj przynajmniej dwa argumenty")
+    if b != None:
+        mytitle = f'{a} czy {b}' 
     if c != None:
         mytitle = mytitle + f' czy {c}'
     if d != None:
