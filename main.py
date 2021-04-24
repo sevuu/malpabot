@@ -216,7 +216,7 @@ async def avatarid(ctx, id):
 async def poll(ctx, a, b=None, c=None, d=None, e=None, f=None):
     emojis = ['\U0001F1E6']
     if b == None:
-        ctx.send("podaj przynajmniej dwa argumenty")
+        await ctx.send("podaj przynajmniej dwa argumenty") 
     if b != None:
         mytitle = f'{a} czy {b}' 
     if c != None:
