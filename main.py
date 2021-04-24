@@ -216,6 +216,8 @@ async def avatarid(ctx, id):
 async def poll(ctx, a, b, c=None, d=None, e=None, f=None):
     emojis = ['\U0001F1E6','\U0001F1E7']
     mytitle = f'{a} czy {b}' 
+    if b == '':
+        ctx.send("podaj przynajmniej dwa argumenty")
     if c != None:
         mytitle = mytitle + f' czy {c}'
     if d != None:
@@ -230,7 +232,6 @@ async def poll(ctx, a, b, c=None, d=None, e=None, f=None):
     if c != None:
         embed.add_field(name=f"{c}", value=":regional_indicator_c:  ", inline=True)
         emojis.append('\U0001F1E8')
-        
     if d != None:
         embed.add_field(name=f"{d}", value=":regional_indicator_d:  ", inline=True)
         emojis.append('\U0001F1E9')
