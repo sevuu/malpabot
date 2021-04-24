@@ -214,7 +214,7 @@ async def avatarid(ctx, id):
 
 @client.command(brief = f"Ankieta")
 async def poll(ctx, a, b=None, c=None, d=None, e=None, f=None):
-    emojis = ['\U0001F1E6','\U0001F1E7']
+    emojis = ['\U0001F1E6']
     mytitle = f'{a} czy {b}' 
     if b == None:
         ctx.send("podaj przynajmniej dwa argumenty")
@@ -228,7 +228,9 @@ async def poll(ctx, a, b=None, c=None, d=None, e=None, f=None):
         mytitle = mytitle + f' czy {f}'
     embed=discord.Embed(title="Ankieta", description=mytitle)
     embed.add_field(name=f"{a}", value=":regional_indicator_a:  ", inline=True)
-    embed.add_field(name=f"{b}", value=":regional_indicator_b:  ", inline=True)
+    if b != None:
+        embed.add_field(name=f"{c}", value=":regional_indicator_b:  ", inline=True)
+        emojis.append('\U0001F1E7')
     if c != None:
         embed.add_field(name=f"{c}", value=":regional_indicator_c:  ", inline=True)
         emojis.append('\U0001F1E8')
