@@ -335,7 +335,7 @@ async def clear(ctx,amount=1):
 
 @client.command(brief="Slotsy")
 async def slots(ctx):
-    emojis = ['🍋','💎','🍒','🍌','🐵','<:slots7:835924846072430592>','<:kuc:734732791413211186>']
+    emojis = ['💎','🍌','🐵','<:slots7:835924846072430592>','<:kuc:734732791413211186>']
     slot1 = emojis[random.randint(1,len(emojis)-1)]
     slot2 = emojis[random.randint(1,len(emojis)-1)]
     slot3 = emojis[random.randint(1,len(emojis)-1)]
