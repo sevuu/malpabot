@@ -341,6 +341,8 @@ async def slots(ctx):
     slot3 = emojis[random.randint(1,len(emojis)-1)]
     if slot1 == slot2 and slot2 == slot3:
         wincheck = 'wygrales'
+    elif slot1 == '<:kuc:734732791413211186>' and slot2 == '<:kuc:734732791413211186>' and slot3 == '<:kuc:734732791413211186>':
+        wincheck = 'wygrales krawężnik'
     else:
         wincheck = 'przegrales'
     embed=discord.Embed(title="Slotsy")
