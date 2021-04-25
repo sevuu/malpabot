@@ -336,12 +336,12 @@ async def clear(ctx,amount=1):
 @client.command(brief="Slotsy")
 async def slots(ctx):
     emojis = ['💎','🍌','🐵','<:slots7:835924846072430592>','<:kuc:734732791413211186>']
-    slot1 = emojis[random.randint(1,len(emojis)-1)]
-    slot2 = emojis[random.randint(1,len(emojis)-1)]
-    slot3 = emojis[random.randint(1,len(emojis)-1)]
+    slot1 = emojis[random.randint(0,len(emojis)-1)]
+    slot2 = emojis[random.randint(0,len(emojis)-1)]
+    slot3 = emojis[random.randint(0,len(emojis)-1)]
     if slot1 == slot2 and slot2 == slot3:
         wincheck = 'wygrales'
-    elif slot1 == '<:kuc:734732791413211186>' and slot2 == '<:kuc:734732791413211186>' and slot3 == '<:kuc:734732791413211186>':
+    if slot1 == '<:kuc:734732791413211186>' and slot2 == '<:kuc:734732791413211186>' and slot3 == '<:kuc:734732791413211186>':
         wincheck = 'wygrales krawężnik'
     else:
         wincheck = 'przegrales'
