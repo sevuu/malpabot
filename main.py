@@ -352,7 +352,10 @@ async def slots(ctx):
     embed.set_footer(text=f"{wincheck}")
     await ctx.send(embed=embed)
 
-
+@client.command(brief="‎")
+async def nic(ctx):
+    await ctx.send('‎')
+    
 @client.command(brief="Status komend używających plików")
 async def filestatus(ctx):
     f = open("iq.txt","r")
