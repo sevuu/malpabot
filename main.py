@@ -1,4 +1,4 @@
-import discord, random, asyncio, caesarcipher, os
+import discord, random, asyncio, caesarcipher, os, json
 from discord import voice_client
 from discord import message, FFmpegPCMAudio
 from discord.ext import commands, tasks
@@ -335,21 +335,37 @@ async def clear(ctx,amount=1):
 
 @client.command(brief="Slotsy")
 async def slots(ctx):
+    # with open('balance.json', 'r') as balances:
+    #     balance=balances.read()
+    with open('balance.json') as json_file:
+        obj = json.load(json_file)
     emojis = ['💎','🍌','🐵','<:slots7:835924846072430592>','<:kuc:734732791413211186>']
     slot1 = emojis[random.randint(0,len(emojis)-1)]
     slot2 = emojis[random.randint(0,len(emojis)-1)]
     slot3 = emojis[random.randint(0,len(emojis)-1)]
+    if str(ctx.message.author) not in obj:
+        obj.update({str(ctx.message.author):0})
     if slot1 == slot2 and slot2 == slot3:
         wincheck = 'wygrales'
+        x = obj.get(str(ctx.message.author))
+        obj.update({str(ctx.message.author):x+25})
     if slot1 == '<:kuc:734732791413211186>' and slot2 == '<:kuc:734732791413211186>' and slot3 == '<:kuc:734732791413211186>':
         wincheck = 'wygrales krawężnik'
     else:
         wincheck = 'przegrales'
+        x = obj.get(str(ctx.message.author))
+        obj.update({str(ctx.message.author):x-1})
+
+    print(obj)
+    with open('balance.json','w') as balances:
+        json.dump(obj, balances)
+    balances.close()
+
     embed=discord.Embed(title="Slotsy")
     embed.add_field(name="1", value=f"{slot1}", inline=True)
     embed.add_field(name="2", value=f"{slot2}", inline=True)
     embed.add_field(name="3", value=f"{slot3}", inline=True)
-    embed.set_footer(text=f"{wincheck}")
+    embed.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
     await ctx.send(embed=embed)
 
 @client.command(brief="‎")
