@@ -354,8 +354,8 @@ async def slots(ctx):
 
 @client.command(brief="‎")
 async def nic(ctx):
-    await ctx.send('‎')
-    
+    await ctx.send('‎\n'*40)
+
 @client.command(brief="Status komend używających plików")
 async def filestatus(ctx):
     f = open("iq.txt","r")
