@@ -335,19 +335,19 @@ async def clear(ctx,amount=1):
 
 @client.command(brief="Slotsy")
 async def slots(ctx):
-    emojis = ['🍋','💎','🍒','<:slots7:835924846072430592>','<:kuc:734732791413211186>']
+    emojis = ['🍋','💎','🍒','🍌','🐵','<:slots7:835924846072430592>','<:kuc:734732791413211186>']
     slot1 = emojis[random.randint(1,len(emojis)-1)]
     slot2 = emojis[random.randint(1,len(emojis)-1)]
     slot3 = emojis[random.randint(1,len(emojis)-1)]
     if slot1 == slot2 and slot2 == slot3:
-        chuj = 'wygrales'
+        wincheck = 'wygrales'
     else:
-        chuj = 'przegrales'
+        wincheck = 'przegrales'
     embed=discord.Embed(title="Slotsy")
     embed.add_field(name="1", value=f"{slot1}", inline=True)
     embed.add_field(name="2", value=f"{slot2}", inline=True)
     embed.add_field(name="3", value=f"{slot3}", inline=True)
-    embed.set_footer(text=f"{chuj}")
+    embed.set_footer(text=f"{wincheck}")
     await ctx.send(embed=embed)
 
 
