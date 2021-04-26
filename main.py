@@ -334,7 +334,7 @@ async def clear(ctx,amount=1):
         ctx.channel.send("nie jestes dababy pierdol sei")
 
 @client.command(brief="Slotsy")
-async def slotsx(ctx, bet=1):
+async def slots(ctx, bet=1):
     # with open('balance.json', 'r') as balances:
     #     balance=balances.read()
     with open('balance.json', encoding='utf-8') as json_file:
