@@ -288,7 +288,7 @@ async def starzygabrysia(ctx):
     f = open("starzy.txt","w")
     f.write(str(content))
     f.close()
-    await ctx.send("Gabryś ma {content} ojców")
+    await ctx.send(f"Gabryś ma {content} ojców")
 
 
 @client.command(brief="Losuje randomową liczbę w wybranym zakresie")
@@ -340,22 +340,19 @@ async def slots(ctx, bet=1):
     with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
     emojis = ['💎','🍌','🐵','<:slots7:835924846072430592>','<:kuc:734732791413211186>']
+    #emojis = ['💎','🍌']
+    if str(ctx.message.author) not in obj:
+            obj.update({str(ctx.message.author):50})
     stankonta = obj.get(str(ctx.message.author))
     if int(bet) > stankonta:
         await ctx.send('Nie stać cie na to')
     else:
         slot1 = emojis[random.randint(0,len(emojis)-1)]
         slot2 = emojis[random.randint(0,len(emojis)-1)]
-        slot3 = emojis[random.randint(0,len(emojis)-1)]
-        if str(ctx.message.author) not in obj:
-            obj.update({str(ctx.message.author):50})
-        if slot1 == slot2 and slot2 == slot3:
-            wincheck = 'wygrales'
-            obj.update({str(ctx.message.author):stankonta+bet*25})
-        if slot1 == '<:kuc:734732791413211186>' and slot2 == '<:kuc:734732791413211186>' and slot3 == '<:kuc:734732791413211186>':
-            wincheck = 'wygrales krawężnik'
-        else:
-            wincheck = 'przegrales'
+        slot3 = emojis[random.randint(0,len(emojis)-1)]       
+        if slot1 == slot2 and slot2 == slot3:           
+            obj.update({str(ctx.message.author):stankonta+bet*25})   
+        else: 
             obj.update({str(ctx.message.author):stankonta-int(bet)})
 
         with open('balance.json','w') as balances:
@@ -370,7 +367,7 @@ async def slots(ctx, bet=1):
         await ctx.send(embed=embed)
 
 @client.command(brief="‎")
-async def balance(ctx):
+async def balancetop(ctx):
     with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
     marklist = sorted(obj.items(), key=lambda item: item[1], reverse=True)
@@ -385,6 +382,13 @@ async def balance(ctx):
     await ctx.send(embed=embed)
     # await ctx.send('```'+chuj[1:-1]+'```')
 
+
+@client.command(brief="‎")
+async def balance(ctx):
+    with open('balance.json', encoding='utf-8') as json_file:
+        obj = json.load(json_file)
+    await ctx.send(f"Stan konta: {obj.get(str(ctx.message.author))}")
+
 @client.command(brief="‎free kasa wtf?")
 async def freekasa(ctx):
     with open('balance.json', encoding='utf-8') as json_file:
@@ -392,7 +396,7 @@ async def freekasa(ctx):
     check = obj.get(str(ctx.message.author))
     if check == 0:
         obj.update({str(ctx.message.author):20})
-    print(obj)    
+  
     with open('balance.json','w') as balances:
             json.dump(obj, balances)
     balances.close()
