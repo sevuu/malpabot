@@ -339,8 +339,7 @@ async def slots(ctx, bet=1):
     #     balance=balances.read()
     with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
-    #emojis = ['💎','🍌','🐵','<:slots7:835924846072430592>','<:kuc:734732791413211186>']
-    emojis = ['<:slots7:835924846072430592>','<:kuc:734732791413211186>']
+    emojis = ['💎','🍌','🐵','<:slots7:835924846072430592>','<:kuc:734732791413211186>']
     stankonta = obj.get(str(ctx.message.author))
     if int(bet) > stankonta:
         await ctx.send('Nie stać cie na to')
