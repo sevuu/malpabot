@@ -351,7 +351,7 @@ async def slots(ctx, bet=1):
             obj.update({str(ctx.message.author):50})
         if slot1 == slot2 and slot2 == slot3:
             wincheck = 'wygrales'
-            obj.update({str(ctx.message.author):stankonta+(int(bet)*25)})
+            obj.update({str(ctx.message.author):stankonta+bet*25})
         if slot1 == '<:kuc:734732791413211186>' and slot2 == '<:kuc:734732791413211186>' and slot3 == '<:kuc:734732791413211186>':
             wincheck = 'wygrales krawężnik'
         else:
