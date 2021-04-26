@@ -208,7 +208,7 @@ async def avatar(ctx):
 @client.command(brief = f"Avatar ale wpisujesz id i tlye w sumie xd")
 async def avatarid(ctx, id):
     user = await client.fetch_user(id)
-    embed=discord.Embed(title="avatar ", color=0xFF5733)
+    embed=discord.Embed(title='', color=0xFF5733)
     embed.set_image(url = user.avatar_url)
     await ctx.send(embed=embed)
 
@@ -369,10 +369,10 @@ async def slots(ctx):
     await ctx.send(embed=embed)
 
 @client.command(brief="‎")
-async def balance(ctx):
-    with open('balance.json') as json_file:
+async def balancee(ctx):
+    with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
-    marklist = sorted(obj.items(), key=lambda x:x[1])
+    marklist = sorted(obj.items(), key=lambda item: item[1], reverse=True)
     sortdict = dict(marklist)
     chuj = json.dumps(sortdict, indent=0)
     await ctx.send('```'+chuj[1:-1]+'```')
