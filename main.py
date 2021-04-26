@@ -369,6 +369,15 @@ async def slots(ctx):
     await ctx.send(embed=embed)
 
 @client.command(brief="‎")
+async def balance(ctx):
+    with open('balance.json') as json_file:
+        obj = json.load(json_file)
+    marklist = sorted(obj.items(), key=lambda x:x[1])
+    sortdict = dict(marklist)
+    chuj = json.dumps(sortdict, indent=0)
+    await ctx.send('```'+chuj[1:-1]+'```')
+
+@client.command(brief="‎")
 async def nic(ctx):
     await ctx.send('‎\n'*40)
 
