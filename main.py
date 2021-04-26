@@ -369,13 +369,20 @@ async def slots(ctx):
     await ctx.send(embed=embed)
 
 @client.command(brief="‎")
-async def balancee(ctx):
+async def balance(ctx):
     with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
     marklist = sorted(obj.items(), key=lambda item: item[1], reverse=True)
     sortdict = dict(marklist)
     chuj = json.dumps(sortdict, indent=0)
-    await ctx.send('```'+chuj[1:-1]+'```')
+    bvalues = list(sortdict.values())
+    bkeys = list(sortdict)
+    embed=discord.Embed(title="Top 3")
+    embed.add_field(name=f"{bkeys[0]}", value=f"{bvalues[0]}", inline=False)
+    embed.add_field(name=f"{bkeys[1]}", value=f"{bvalues[1]}", inline=False)
+    embed.add_field(name=f"{bkeys[2]}", value=f"{bvalues[2]}", inline=False)
+    await ctx.send(embed=embed)
+    # await ctx.send('```'+chuj[1:-1]+'```')
 
 @client.command(brief="‎")
 async def nic(ctx):
