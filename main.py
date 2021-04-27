@@ -24,24 +24,6 @@ async def on_ready():
 async def ping(ctx):
     await ctx.channel.send(f'Pong! ({round(client.latency*1000)}ms)')
 
-
-# @client.command(brief = "super quiz :)", description = "bajerancki quizior :D")
-# async def quiz(ctx):
-#     los = random.randint(0,9)
-#     f = open(f'./cyfry/{los}.png', 'rb')
-#     file = discord.File(f)
-#     await ctx.send("Zgadnij co to za cyfra:")
-#     await ctx.send(file=file)
-
-#     def check(msg):
-#         return msg.channel == ctx.channel
-
-#     msg = await client.wait_for("message", check=check)
-#     if msg.content.lower() == f"{los}":
-#         await ctx.send("Brawo :)")
-#     else:
-#         await ctx.send("Debil")
-
 @client.command(brief = "super quiz :)", description = "bajerancki quizior :D")
 async def avatarquiz(ctx):
     avatary = os.listdir('avatar')
@@ -61,13 +43,6 @@ async def avatarquiz(ctx):
     else:
         await ctx.send("Debil")
 
-
-# @client.command(brief = "Oznacza Gabrysia 6 razy co 2 sekundy")
-# async def oznaczczecha(ctx):
-#     for i in range(0,6):
-#         await ctx.channel.send('<@327742627233398784>')
-#         await asyncio.sleep(2)
-
 @client.command(brief = "MMA Fighter")
 async def zagus(ctx):
     await ctx.channel.send(f':grinning: :right_facing_fist: :woman_red_haired:')
@@ -86,12 +61,6 @@ async def on_message(message):
     #         await message.channel.send('<@327742627233398784> <:tf:805707103628951592>')
 
     await client.process_commands(message)
-
-            
-# @client.event
-# async def on_command_error(ctx, error):
-#     if isinstance(error, commands.errors.CommandInvokeError):
-#         await ctx.send("cos sie zepsuło :(")
 
 
 @client.command(brief = "Wynik z dodawania")
@@ -188,11 +157,6 @@ async def id(ctx):
         embed.set_footer(text="ID: "+str(ctx.message.author.id))
         await ctx.send(embed=embed)
 
-# @client.command(brief = f"gej")
-# async def test(ctx):
-    
-#     elif ctx.message.author.id == 252217902202093568:
-#         await ctx.send("sperma")
 
 @client.command(brief = f"Twój avatar (bezużyteczne bo {prefix}id istnieje)")
 async def avatar(ctx):
@@ -447,6 +411,16 @@ async def freekasa(ctx):
             json.dump(obj, balances)
     balances.close()
     
+
+@client.command(brief="‎host info")
+async def hostinfo(ctx):
+    myCmd = int(os.popen('cat /sys/class/thermal/thermal_zone0/temp').read())
+    await ctx.send(f'CPU temp: {myCmd/1000} °C')
+
+@client.command(brief="krowa mówi wtf?", description='https://en.wikipedia.org/wiki/Cowsay')
+async def cowsay(ctx,*,msg):
+    myCmd = os.popen(f'cowsay {msg}').read()
+    await ctx.send(f'```{myCmd}```')
 
 @client.command(brief="‎")
 async def nic(ctx):
