@@ -352,7 +352,7 @@ async def slots(ctx, bet=1):
 
 
 #<a:rolling:836322964931608586>
-@client.command(brief="‎")
+@client.command(brief="")
 async def balancetop(ctx):
     with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
@@ -371,7 +371,7 @@ async def balancetop(ctx):
     # await ctx.send('```'+chuj[1:-1]+'```')
 
 
-@client.command(brief="‎")
+@client.command(brief="")
 async def balance(ctx):
     with open('balance.json', encoding='utf-8') as json_file:
             obj = json.load(json_file)
@@ -381,7 +381,7 @@ async def balance(ctx):
     else:
         await ctx.send(f"Twój stan konta: {obj.get(str(ctx.message.author))}")
     
-@client.command(brief="‎przelew oznaczonej osobie")
+@client.command(brief="przelew oznaczonej osobie")
 async def przelew(ctx, amount=1):
     with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
@@ -399,7 +399,7 @@ async def przelew(ctx, amount=1):
         balances.close()    
         await ctx.send(f"Przelano {amount} użytkownikowi {ctx.message.mentions[0]}")
 
-@client.command(brief="‎free kasa wtf?")
+@client.command(brief="free kasa wtf?")
 async def freekasa(ctx):
     with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
@@ -412,7 +412,7 @@ async def freekasa(ctx):
     balances.close()
     
 
-@client.command(brief="‎host info")
+@client.command(brief="host info")
 async def hostinfo(ctx):
     myCmd = int(os.popen('cat /sys/class/thermal/thermal_zone0/temp').read())
     await ctx.send(f'CPU temp: {myCmd/1000} °C')
@@ -420,6 +420,11 @@ async def hostinfo(ctx):
 @client.command(brief="krowa mówi wtf?", description='https://en.wikipedia.org/wiki/Cowsay')
 async def cowsay(ctx,*,msg):
     myCmd = os.popen(f'cowsay {msg}').read()
+    await ctx.send(f'```{myCmd}```')
+
+@client.command(brief="wolny ram")
+async def freem(ctx):
+    myCmd = os.popen(f'free -h -m').read()
     await ctx.send(f'```{myCmd}```')
 
 @client.command(brief="‎")
