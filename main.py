@@ -1,4 +1,4 @@
-import discord, bottoken, random, asyncio, caesarcipher, os, json
+import discord, bottoken, random, asyncio, caesarcipher, os, json, monkies
 from discord import guild
 from discord import voice_client
 from discord import message, FFmpegPCMAudio
@@ -278,6 +278,17 @@ async def nhentai(ctx):
         else:
             continue
 
+@client.command(brief="Kopnij se sobiego :)")
+async def rndmalpa(ctx):
+    malpy = monkies.malpiszony
+    mKeys = list(malpy.keys())
+    randomLang = mKeys[random.randint(0,len(mKeys)-1)]
+    randomLangMonky = malpy.get(randomLang)
+    embed=discord.Embed(title='Randomowa małpa')
+    embed.add_field(name=randomLang, value=randomLangMonky, inline=False)
+    await ctx.send(embed=embed)
+
+
 
 @client.command(brief="Mój kolega :)")
 async def czechu(ctx):
@@ -316,6 +327,7 @@ async def slots(ctx, bet=1):
         slot1 = emojis[random.randint(0,len(emojis)-1)]
         slot2 = emojis[random.randint(0,len(emojis)-1)]
         slot3 = emojis[random.randint(0,len(emojis)-1)]
+
         if slot1 == slot2 == slot3 == '<:diamond:836303727093743707>':
             obj.update({str(ctx.message.author):stankonta+bet*25})
             wincheck = 'wygrałeś'
@@ -347,9 +359,70 @@ async def slots(ctx, bet=1):
         embed2.add_field(name="2", value=f"<a:rolling:836322964931608586>", inline=True)
         embed2.add_field(name="3", value=f"<a:rolling:836322964931608586>", inline=True)
         embed2.set_footer(text=f"stan konta: ")
+
         msg = await ctx.send(embed=embed2)
         await asyncio.sleep(0.7)
         await msg.edit(embed=embed1)
+
+
+
+@client.command(brief="ruleta")
+async def ruletka(ctx, color='', bet=1):
+    with open('balance.json', encoding='utf-8') as json_file:
+        obj = json.load(json_file)
+    emojisselected = ['<:black:836695075646865458>','<:red:836677875235160094>']
+
+    if str(ctx.message.author) not in obj:
+            obj.update({str(ctx.message.author):50})
+    stankonta = obj.get(str(ctx.message.author))
+    if int(bet) > stankonta:
+        await ctx.send(f'Nie stać cie na to (ale zawsze jest {prefix}freekasa <:tf:805707103628951592>)')
+    elif int(bet) < 1:
+        await ctx.send(f'Chciało sie pocheatować co <:tf:805707103628951592>')
+    else:
+        slot1 = emojisselected[random.randint(0,len(emojisselected)-1)]
+
+        if slot1 == emojisselected[1]:
+            slotL = '<:black:836695075646865458>'
+            slotR = '<:black:836695075646865458>'
+
+        if slot1 == emojisselected[0]:
+            slotL = '<:red:836677875235160094>'
+            slotR = '<:red:836677875235160094>'
+
+        if slot1 == '<:red:836677875235160094>' and color == 'r':
+            obj.update({str(ctx.message.author):stankonta+bet*2})
+            wincheck = 'wygrałeś'
+
+        elif slot1 == '<:black:836695075646865458>' and color == 'b':
+            obj.update({str(ctx.message.author):stankonta+bet*2})
+            wincheck = 'wygrałeś'
+        
+        else:
+            obj.update({str(ctx.message.author):stankonta-int(bet)})
+
+        with open('balance.json','w') as balances:
+            json.dump(obj, balances)
+        balances.close()
+
+        embed2=discord.Embed(title=f"Ruletka {ctx.message.author}")
+        embed2.add_field(name="-", value=f"{slotL}", inline=True)
+        embed2.add_field(name="⬇️", value=f"{slot1}", inline=True)
+        embed2.add_field(name="-", value=f"{slotR}", inline=True)
+        embed2.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
+
+        embed1=discord.Embed(title=f"Ruletka {ctx.message.author}")
+        embed1.add_field(name="-", value=f"<a:roulette:836696081994743879>", inline=True)
+        embed1.add_field(name="⬇️", value=f"<a:roulette2:836697084266676274>", inline=True)
+        embed1.add_field(name="-", value=f"<a:roulette:836696081994743879>", inline=True)
+        embed1.set_footer(text=f"stan konta: ")
+
+        msg = await ctx.send(embed=embed1)
+        await asyncio.sleep(0.7)
+        await msg.edit(embed=embed2)
+
+
+
 
 @client.command(brief="‎top 5 gambling addictów")
 async def balancetop(ctx):
@@ -405,9 +478,10 @@ async def sklep(ctx, option=''):
     stankonta = obj.get(str(ctx.message.author))
     if option == '':
         embed=discord.Embed(title="Sklep", description=f"{prefix}sklep <opcja>", color=0x00a7b3)
-        embed.add_field(name="1. Ranga Herbata Lipton Earl Grey Orange", value="100000", inline=True)
-        embed.add_field(name="2. 5 pingów @everyone", value="25000", inline=False)
+        embed.add_field(name="1. Uzależnieniec...", value="100000", inline=True)
+        embed.add_field(name="2. 5 pingów @everyone", value="25000", inline=True)
         embed.add_field(name="3. 5 pingów Sobiego", value="100", inline=True)
+        embed.add_field(name="4. Autograf", value="10", inline=True)
         embed.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
         await ctx.send(embed=embed)
     elif option == '1':
@@ -417,7 +491,7 @@ async def sklep(ctx, option=''):
         else:
             obj.update({str(ctx.message.author):stankonta-price})
             member = ctx.message.author
-            role = discord.utils.get(member.guild.roles, name='Herbata Lipton Earl Grey Orange')
+            role = discord.utils.get(member.guild.roles, name='Gambling addict')
             await member.add_roles(role)
     elif option == '2':
         price = 25000
@@ -437,6 +511,15 @@ async def sklep(ctx, option=''):
             for i in range(5):
                 await ctx.send('<@439848715264720896>')
                 await asyncio.sleep(0.7)
+    elif option == '4':
+        price = 10
+        if price > stankonta:
+            await ctx.send('Nie stać cie na to')
+        else:
+            obj.update({str(ctx.message.author):stankonta-price})
+            embed=discord.Embed(title="Mój autograf specjalnie dla ciebie :)")
+            embed.set_image(url = 'https://i.imgur.com/pnNGFSw.png')
+            await ctx.send(embed=embed)
     else:
         await ctx.send('nie ma takiej opcji')
 
@@ -476,6 +559,11 @@ async def freem(ctx):
 @client.command(brief="‎")
 async def nic(ctx):
     await ctx.send('‎\n'*40)
+
+@client.command(brief="link do bota")
+async def invite(ctx):
+    await ctx.send('‎https://discord.com/oauth2/authorize?client_id=811696300285362207&scope=bot&permissions=8')
+
 
 @client.command(brief="Status komend używających plików")
 async def filestatus(ctx):
