@@ -339,19 +339,26 @@ async def slots(ctx, bet=1):
     #     balance=balances.read()
     with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
-    emojis = ['💎','🍌','🐵','<:slots7:835924846072430592>','<:kuc:734732791413211186>']
-    #emojis = ['💎','🍌']
+    emojis = ['<:diamond:836303727093743707>','<:monke:836303742034247752>','<:slots7:835924846072430592>','<:kuc:734732791413211186>']
     if str(ctx.message.author) not in obj:
             obj.update({str(ctx.message.author):50})
     stankonta = obj.get(str(ctx.message.author))
     if int(bet) > stankonta:
-        await ctx.send('Nie stać cie na to')
+        await ctx.send(f'Nie stać cie na to (ale zawsze jest {prefix}freekasa <:tf:805707103628951592>)')
     else:
         slot1 = emojis[random.randint(0,len(emojis)-1)]
         slot2 = emojis[random.randint(0,len(emojis)-1)]
-        slot3 = emojis[random.randint(0,len(emojis)-1)]       
-        if slot1 == slot2 and slot2 == slot3:           
-            obj.update({str(ctx.message.author):stankonta+bet*25})   
+        slot3 = emojis[random.randint(0,len(emojis)-1)]
+        if slot1 == slot2 == slot3 == '<:diamond:836303727093743707>':
+            obj.update({str(ctx.message.author):stankonta+bet*25})
+        elif slot1 == slot2 == slot3 == '<:monke:836303742034247752>':
+            obj.update({str(ctx.message.author):stankonta+bet*50})
+        elif slot1 == slot2 == slot3 == '<:slots7:835924846072430592>':
+            obj.update({str(ctx.message.author):stankonta+bet*75})
+        elif slot1 == slot2 == slot3 == '<:kuc:734732791413211186>':
+            obj.update({str(ctx.message.author):stankonta+bet*5})
+        # if slot1 == slot2 and slot2 == slot3:           
+        #     obj.update({str(ctx.message.author):stankonta+bet*25})   
         else: 
             obj.update({str(ctx.message.author):stankonta-int(bet)})
 
@@ -359,13 +366,23 @@ async def slots(ctx, bet=1):
             json.dump(obj, balances)
         balances.close()
 
-        embed=discord.Embed(title="Slotsy")
-        embed.add_field(name="1", value=f"{slot1}", inline=True)
-        embed.add_field(name="2", value=f"{slot2}", inline=True)
-        embed.add_field(name="3", value=f"{slot3}", inline=True)
-        embed.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
-        await ctx.send(embed=embed)
+        embed1=discord.Embed(title=f"Slotsy {ctx.message.author}")
+        embed1.add_field(name="1", value=f"{slot1}", inline=True)
+        embed1.add_field(name="2", value=f"{slot2}", inline=True)
+        embed1.add_field(name="3", value=f"{slot3}", inline=True)
+        embed1.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
 
+        embed2=discord.Embed(title=f"Slotsy {ctx.message.author}")
+        embed2.add_field(name="1", value=f"<a:rolling:836322964931608586>", inline=True)
+        embed2.add_field(name="2", value=f"<a:rolling:836322964931608586>", inline=True)
+        embed2.add_field(name="3", value=f"<a:rolling:836322964931608586>", inline=True)
+        embed2.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
+        msg = await ctx.send(embed=embed2)
+        await asyncio.sleep(0.7)
+        await msg.edit(embed=embed1)
+
+
+#<a:rolling:836322964931608586>
 @client.command(brief="‎")
 async def balancetop(ctx):
     with open('balance.json', encoding='utf-8') as json_file:
@@ -375,10 +392,12 @@ async def balancetop(ctx):
     chuj = json.dumps(sortdict, indent=0)
     bvalues = list(sortdict.values())
     bkeys = list(sortdict)
-    embed=discord.Embed(title="Top 3")
+    embed=discord.Embed(title="Top 5")
     embed.add_field(name=f"{bkeys[0]}", value=f"{bvalues[0]}", inline=False)
     embed.add_field(name=f"{bkeys[1]}", value=f"{bvalues[1]}", inline=False)
     embed.add_field(name=f"{bkeys[2]}", value=f"{bvalues[2]}", inline=False)
+    embed.add_field(name=f"{bkeys[3]}", value=f"{bvalues[3]}", inline=False)
+    embed.add_field(name=f"{bkeys[4]}", value=f"{bvalues[4]}", inline=False)
     await ctx.send(embed=embed)
     # await ctx.send('```'+chuj[1:-1]+'```')
 
@@ -386,8 +405,25 @@ async def balancetop(ctx):
 @client.command(brief="‎")
 async def balance(ctx):
     with open('balance.json', encoding='utf-8') as json_file:
+            obj = json.load(json_file)
+    if len(ctx.message.mentions)>0:
+        #embed=discord.Embed(title=str(ctx.message.mentions[0]), color=0xFF5733)
+        await ctx.send(f"Stan konta {ctx.message.mentions[0]}: {obj.get(str(ctx.message.mentions[0]))}")
+    else:
+        await ctx.send(f"Twój stan konta: {obj.get(str(ctx.message.author))}")
+    
+@client.command(brief="‎przelew oznaczonej osobie")
+async def przelew(ctx, amount=1):
+    with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
-    await ctx.send(f"Stan konta: {obj.get(str(ctx.message.author))}")
+    stankonta1 = obj.get(str(ctx.message.author))
+    stankonta2 = obj.get(str(ctx.message.mentions[0]))
+    obj.update({str(ctx.message.author):stankonta1-amount})
+    obj.update({str(ctx.message.mentions[0]):stankonta2+amount})
+    with open('balance.json','w') as balances:
+        json.dump(obj, balances)
+    balances.close()    
+    await ctx.send(f"Przelano {amount} użytkownikowi {ctx.message.mentions[0]}")
 
 @client.command(brief="‎free kasa wtf?")
 async def freekasa(ctx):
@@ -396,11 +432,11 @@ async def freekasa(ctx):
     check = obj.get(str(ctx.message.author))
     if check == 0:
         obj.update({str(ctx.message.author):20})
-  
+        await ctx.send(':)')
     with open('balance.json','w') as balances:
             json.dump(obj, balances)
     balances.close()
-    await ctx.send(':)')
+    
 
 @client.command(brief="‎")
 async def nic(ctx):
