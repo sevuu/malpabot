@@ -495,4 +495,6 @@ async def zagusi(ctx):
 
 
 
+
+
 client.run(bottoken.token)
