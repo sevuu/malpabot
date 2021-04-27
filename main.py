@@ -295,11 +295,11 @@ async def starzygabrysia(ctx):
 async def roll(ctx,a,b):
     await ctx.send(str(random.randint(int(a),int(b))))
 
-@client.command(brief="Randomowa strona nhentai do id 355686 :)")
+@client.command(brief="Randomowa strona nhentai do id 356714 :)")
 async def nhentai(ctx):
     FBI = True
     while FBI:
-        id = random.randint(1,355686)
+        id = random.randint(1,356714)
         doujin = Hentai(id)
         tagi = [tag.name for tag in doujin.tag]
         blacklist = ["lolicon","shotacon","rape","incest","scat"]
@@ -375,7 +375,7 @@ async def slots(ctx, bet=1):
         embed1.add_field(name="1", value=f"{slot1}", inline=True)
         embed1.add_field(name="2", value=f"{slot2}", inline=True)
         embed1.add_field(name="3", value=f"{slot3}", inline=True)
-        embed1.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}     {wincheck}")
+        embed1.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
 
         embed2=discord.Embed(title=f"Slotsy {ctx.message.author}")
         embed2.add_field(name="1", value=f"<a:rolling:836322964931608586>", inline=True)
