@@ -1,4 +1,4 @@
-import discord, random, asyncio, caesarcipher, os, json
+import discord, bottoken, random, asyncio, caesarcipher, os, json
 from discord import voice_client
 from discord import message, FFmpegPCMAudio
 from discord.ext import commands, tasks
@@ -345,6 +345,8 @@ async def slots(ctx, bet=1):
     stankonta = obj.get(str(ctx.message.author))
     if int(bet) > stankonta:
         await ctx.send(f'Nie stać cie na to (ale zawsze jest {prefix}freekasa <:tf:805707103628951592>)')
+    elif int(bet) < 1:
+        await ctx.send(f'Chciało sie pocheatować co <:tf:805707103628951592>')
     else:
         slot1 = emojis[random.randint(0,len(emojis)-1)]
         slot2 = emojis[random.randint(0,len(emojis)-1)]
@@ -418,12 +420,15 @@ async def przelew(ctx, amount=1):
         obj = json.load(json_file)
     stankonta1 = obj.get(str(ctx.message.author))
     stankonta2 = obj.get(str(ctx.message.mentions[0]))
-    obj.update({str(ctx.message.author):stankonta1-amount})
-    obj.update({str(ctx.message.mentions[0]):stankonta2+amount})
-    with open('balance.json','w') as balances:
-        json.dump(obj, balances)
-    balances.close()    
-    await ctx.send(f"Przelano {amount} użytkownikowi {ctx.message.mentions[0]}")
+    if amount > stankonta1:
+        await ctx.send('Nie stać cie na to')
+    else:
+        obj.update({str(ctx.message.author):stankonta1-amount})
+        obj.update({str(ctx.message.mentions[0]):stankonta2+amount})
+        with open('balance.json','w') as balances:
+            json.dump(obj, balances)
+        balances.close()    
+        await ctx.send(f"Przelano {amount} użytkownikowi {ctx.message.mentions[0]}")
 
 @client.command(brief="‎free kasa wtf?")
 async def freekasa(ctx):
@@ -489,5 +494,5 @@ async def zagusi(ctx):
 
 
 
-token = "ODExNjk2MzAwMjg1MzYyMjA3.YC19Fg.Jgr1bplwOoT8OKTenpwQsNcdJfU"
-client.run(token)
+
+client.run(bottoken.token)

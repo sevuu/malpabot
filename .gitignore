@@ -2,3 +2,7 @@
 useless/main.py
 heroku/*
 __pycache__/caesarcipher.cpython-39.pyc
+__pycache__/bottoken.cpython-39.pyc
+.gitignore
+bottoken.py
+__pycache__/token.cpython-39.pyc
