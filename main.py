@@ -350,25 +350,24 @@ async def slots(ctx, bet=1):
         await asyncio.sleep(0.7)
         await msg.edit(embed=embed1)
 
-
-#<a:rolling:836322964931608586>
-@client.command(brief="")
+@client.command(brief="‎top 5 gambling addictów")
 async def balancetop(ctx):
-    with open('balance.json', encoding='utf-8') as json_file:
-        obj = json.load(json_file)
-    marklist = sorted(obj.items(), key=lambda item: item[1], reverse=True)
+    with open('balance.json', encoding='utf-8') as f:
+        gambling = json.load(f)
+    marklist = sorted(gambling.items(), key=lambda item: item[1], reverse=True)
     sortdict = dict(marklist)
-    chuj = json.dumps(sortdict, indent=0)
-    bvalues = list(sortdict.values())
+    # sort = json.dumps(sortdict, indent=0)
     bkeys = list(sortdict)
-    embed=discord.Embed(title="Top 5")
-    embed.add_field(name=f"{bkeys[0]}", value=f"{bvalues[0]}", inline=False)
-    embed.add_field(name=f"{bkeys[1]}", value=f"{bvalues[1]}", inline=False)
-    embed.add_field(name=f"{bkeys[2]}", value=f"{bvalues[2]}", inline=False)
-    embed.add_field(name=f"{bkeys[3]}", value=f"{bvalues[3]}", inline=False)
-    embed.add_field(name=f"{bkeys[4]}", value=f"{bvalues[4]}", inline=False)
+    bvalues = list(sortdict.values())
+    embed=discord.Embed(title="Top 5 gambling addictów")
+    num = 0
+    for i in range(5):
+        if 0 <= num < len(bkeys):
+            embed.add_field(name=f"{bkeys[num]}", value=f"{bvalues[num]}", inline=False)
+        else:
+            break
+        num += 1
     await ctx.send(embed=embed)
-    # await ctx.send('```'+chuj[1:-1]+'```')
 
 
 @client.command(brief="")
