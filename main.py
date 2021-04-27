@@ -1,4 +1,5 @@
 import discord, bottoken, random, asyncio, caesarcipher, os, json
+from discord import guild
 from discord import voice_client
 from discord import message, FFmpegPCMAudio
 from discord.ext import commands, tasks
@@ -369,7 +370,6 @@ async def balancetop(ctx):
         num += 1
     await ctx.send(embed=embed)
 
-
 @client.command(brief="")
 async def balance(ctx):
     with open('balance.json', encoding='utf-8') as json_file:
@@ -397,6 +397,53 @@ async def przelew(ctx, amount=1):
             json.dump(obj, balances)
         balances.close()    
         await ctx.send(f"Przelano {amount} użytkownikowi {ctx.message.mentions[0]}")
+
+@client.command(brief="tu sie kupuje")
+async def sklep(ctx, option=''):
+    with open('balance.json', encoding='utf-8') as json_file:
+        obj = json.load(json_file)
+    stankonta = obj.get(str(ctx.message.author))
+    if option == '':
+        embed=discord.Embed(title="Sklep", description=f"{prefix}sklep <opcja>", color=0x00a7b3)
+        embed.add_field(name="1. Ranga Herbata Lipton Earl Grey Orange", value="100000", inline=True)
+        embed.add_field(name="2. 5 pingów @everyone", value="25000", inline=False)
+        embed.add_field(name="3. 5 pingów Sobiego", value="100", inline=True)
+        embed.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
+        await ctx.send(embed=embed)
+    elif option == '1':
+        price = 100000
+        if price > stankonta:
+            await ctx.send('Nie stać cie na to')
+        else:
+            obj.update({str(ctx.message.author):stankonta-price})
+            member = ctx.message.author
+            role = discord.utils.get(member.guild.roles, name='Herbata Lipton Earl Grey Orange')
+            await member.add_roles(role)
+    elif option == '2':
+        price = 25000
+        if price > stankonta:
+            await ctx.send('Nie stać cie na to')
+        else:
+            obj.update({str(ctx.message.author):stankonta-price})
+            for i in range(5):
+                await ctx.send(f"{ctx.message.guild.default_role}  <:tf:805707103628951592>")
+                await asyncio.sleep(0.7)
+    elif option == '3':
+        price = 100
+        if price > stankonta:
+            await ctx.send('Nie stać cie na to')
+        else:
+            obj.update({str(ctx.message.author):stankonta-price})
+            for i in range(5):
+                await ctx.send('<@439848715264720896>')
+                await asyncio.sleep(0.7)
+    else:
+        await ctx.send('nie ma takiej opcji')
+
+    with open('balance.json','w') as balances:
+        json.dump(obj, balances)
+    balances.close()
+
 
 @client.command(brief="free kasa wtf?")
 async def freekasa(ctx):
