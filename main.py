@@ -422,6 +422,8 @@ async def przelew(ctx, amount=1):
     stankonta2 = obj.get(str(ctx.message.mentions[0]))
     if amount > stankonta1:
         await ctx.send('Nie stać cie na to')
+    if amount < 0:
+        await ctx.send('Jebany złodziej')
     else:
         obj.update({str(ctx.message.author):stankonta1-amount})
         obj.update({str(ctx.message.mentions[0]):stankonta2+amount})
