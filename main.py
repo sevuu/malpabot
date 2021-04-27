@@ -353,16 +353,19 @@ async def slots(ctx, bet=1):
         slot3 = emojis[random.randint(0,len(emojis)-1)]
         if slot1 == slot2 == slot3 == '<:diamond:836303727093743707>':
             obj.update({str(ctx.message.author):stankonta+bet*25})
+            wincheck = 'wygrałeś'
         elif slot1 == slot2 == slot3 == '<:monke:836303742034247752>':
             obj.update({str(ctx.message.author):stankonta+bet*50})
+            wincheck = 'wygrałeś'
         elif slot1 == slot2 == slot3 == '<:slots7:835924846072430592>':
             obj.update({str(ctx.message.author):stankonta+bet*75})
+            wincheck = 'wygrałeś'
         elif slot1 == slot2 == slot3 == '<:kuc:734732791413211186>':
             obj.update({str(ctx.message.author):stankonta+bet*5})
-        # if slot1 == slot2 and slot2 == slot3:           
-        #     obj.update({str(ctx.message.author):stankonta+bet*25})   
+            wincheck = 'wygrałeś'  
         else: 
             obj.update({str(ctx.message.author):stankonta-int(bet)})
+            wincheck = 'przegrałeś'
 
         with open('balance.json','w') as balances:
             json.dump(obj, balances)
@@ -372,13 +375,13 @@ async def slots(ctx, bet=1):
         embed1.add_field(name="1", value=f"{slot1}", inline=True)
         embed1.add_field(name="2", value=f"{slot2}", inline=True)
         embed1.add_field(name="3", value=f"{slot3}", inline=True)
-        embed1.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
+        embed1.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}     {wincheck}")
 
         embed2=discord.Embed(title=f"Slotsy {ctx.message.author}")
         embed2.add_field(name="1", value=f"<a:rolling:836322964931608586>", inline=True)
         embed2.add_field(name="2", value=f"<a:rolling:836322964931608586>", inline=True)
         embed2.add_field(name="3", value=f"<a:rolling:836322964931608586>", inline=True)
-        embed2.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
+        embed2.set_footer(text=f"stan konta: ")
         msg = await ctx.send(embed=embed2)
         await asyncio.sleep(0.7)
         await msg.edit(embed=embed1)
