@@ -452,6 +452,38 @@ async def ruletka(ctx, bet, color):
     else:
         await ctx.send('Nie ma takiego koloru!')
 
+@client.command(brief="crash")
+async def crash(ctx, bet, multiplier):
+    multiplier = float(multiplier)
+    bet = int(bet)
+    with open('balance.json', encoding='utf-8') as json_file:
+        obj = json.load(json_file)
+    rndmultiplier = (random.randint(1,100)/10)
+    stankonta = int(obj.get(str(ctx.message.author)))
+    stankonta = float(stankonta)
+    if bet > stankonta:
+        await ctx.send(f'Nie stać cie na to (ale zawsze jest {prefix}freekasa <:tf:805707103628951592>)')
+    elif bet < 1:
+        await ctx.send(f'Chciało sie pocheatować co <:tf:805707103628951592>')
+    elif multiplier <= rndmultiplier:
+        obj.update({str(ctx.message.author):stankonta+bet*multiplier})
+        embed=discord.Embed(title="Crash", description=f"Wygrałeś {bet*multiplier}", color=0x00ff08)
+        embed.add_field(name="Crashed at:", value=f"{rndmultiplier}", inline=True)
+        embed.add_field(name="Twój mnożnik:", value=f"{multiplier}", inline=True)
+        embed.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
+        await ctx.send(embed=embed)
+    elif multiplier > rndmultiplier:
+        obj.update({str(ctx.message.author):stankonta-int(bet)})
+        embed=discord.Embed(title="Crash", description="Przegrałeś", color=0xff0000)
+        embed.add_field(name="Crashed at:", value=f"{rndmultiplier}", inline=True)
+        embed.add_field(name="Twój mnożnik:", value=f"{multiplier}", inline=True)
+        embed.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
+        await ctx.send(embed=embed)
+    with open('balance.json','w') as balances:
+        json.dump(obj, balances)
+    balances.close()
+    
+
 @client.command(brief="‎top 5 gambling addictów")
 async def members(ctx):
     member_list = ''
