@@ -44,7 +44,7 @@ async def slimak(ctx, enabled="start",interval = 3599):
         cumilInterval.start(ctx)
 @tasks.loop(seconds=5)
 async def cumilInterval(ctx):
-    f = open('slimak.txt',encoding='utf-8')
+    f = open('./datafiles/slimak.txt',encoding='utf-8')
     slimakhuj = f.readlines()
     # await asyncio.sleep(0.01)   #nie wiem po co to tu w sumie dałem ale dla pewności zostawie bo czemu nie
     randomslimak = random.randint(0,len(slimakhuj)-1)

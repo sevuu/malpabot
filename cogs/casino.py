@@ -13,7 +13,7 @@ class Casino(commands.Cog):
     async def slots(self,ctx, bet=1):
     # with open('balance.json', 'r') as balances:
     #     balance=balances.read()
-        with open('balance.json', encoding='utf-8') as json_file:
+        with open('./datafiles/balance.json', encoding='utf-8') as json_file:
             obj = json.load(json_file)
         emojis = ['<:diamond:836303727093743707>','<:monke:836303742034247752>','<:slots7:835924846072430592>','<:kuc:734732791413211186>']
         if str(ctx.message.author) not in obj:
@@ -48,7 +48,7 @@ class Casino(commands.Cog):
                     obj.update({'sevu#0849':stankonta1+int(bet/8)+1})
                 wincheck = 'przegrałeś'
 
-            with open('balance.json','w') as balances:
+            with open('./datafiles/balance.json','w') as balances:
                 json.dump(obj, balances)
             balances.close()
 
@@ -72,7 +72,7 @@ class Casino(commands.Cog):
 
     @commands.command(brief="ruleta")
     async def ruletka(self, ctx, bet, color):
-        with open('balance.json', encoding='utf-8') as json_file:
+        with open('./datafiles/balance.json', encoding='utf-8') as json_file:
             obj = json.load(json_file)
         #Kolejność w liście: B - R - G
         emojisselected = ['<:black:836695075646865458>','<:red:836677875235160094>','<:green:836850106740637696>']
@@ -130,7 +130,7 @@ class Casino(commands.Cog):
                         obj.update({'sevu#0849':stankonta1+int(bet/8)+1})
                     wincheck = 'przegrałeś'
 
-                with open('balance.json','w') as balances:
+                with open('./datafiles/balance.json','w') as balances:
                     json.dump(obj, balances)
                 balances.close()
 
@@ -156,7 +156,7 @@ class Casino(commands.Cog):
     async def crash(self, ctx, bet, multiplier):
         multiplier = float(multiplier)
         bet = int(bet)
-        with open('balance.json', encoding='utf-8') as json_file:
+        with open('./datafiles/balance.json', encoding='utf-8') as json_file:
             obj = json.load(json_file)
         # Nie mam zielonego pojęcia co ja robie ale wydaje sie działać wystarczająco dobrze
         rndmultiplier = round(numpy.random.gamma(3.7,0.5),2)
@@ -187,7 +187,7 @@ class Casino(commands.Cog):
             if ctx.message.author.id != 252217902202093568:
                 stankonta1 = obj.get('sevu#0849')
                 obj.update({'sevu#0849':stankonta1+int(bet/8)+1})
-        with open('balance.json','w') as balances:
+        with open('./datafiles/balance.json','w') as balances:
             json.dump(obj, balances)
         balances.close()
         
@@ -220,7 +220,7 @@ class Casino(commands.Cog):
 
     @commands.command(brief="")
     async def balance(self,ctx):
-        with open('balance.json', encoding='utf-8') as json_file:
+        with open('./datafiles/balance.json', encoding='utf-8') as json_file:
                 obj = json.load(json_file)
         if len(ctx.message.mentions)>0:
             #embed=discord.Embed(title=str(ctx.message.mentions[0]), color=0xFF5733)
@@ -230,7 +230,7 @@ class Casino(commands.Cog):
         
     @commands.command(brief="przelew oznaczonej osobie")
     async def przelew(self,ctx, amount=1):
-        with open('balance.json', encoding='utf-8') as json_file:
+        with open('./datafiles/balance.json', encoding='utf-8') as json_file:
             obj = json.load(json_file)
         stankonta1 = obj.get(str(ctx.message.author))
         stankonta2 = obj.get(str(ctx.message.mentions[0]))
@@ -241,14 +241,14 @@ class Casino(commands.Cog):
         else:
             obj.update({str(ctx.message.author):stankonta1-amount})
             obj.update({str(ctx.message.mentions[0]):stankonta2+amount})
-            with open('balance.json','w') as balances:
+            with open('./datafiles/balance.json','w') as balances:
                 json.dump(obj, balances)
             balances.close()    
             await ctx.send(f"Przelano {amount} użytkownikowi {ctx.message.mentions[0]}")
 
     @commands.command(brief="tu sie kupuje")
     async def sklep(self,ctx, option=''):
-        with open('balance.json', encoding='utf-8') as json_file:
+        with open('./datafiles/balance.json', encoding='utf-8') as json_file:
             obj = json.load(json_file)
         stankonta = obj.get(str(ctx.message.author))
         if option == '':
@@ -298,20 +298,20 @@ class Casino(commands.Cog):
         else:
             await ctx.send('nie ma takiej opcji')
 
-        with open('balance.json','w') as balances:
+        with open('./datafiles/balance.json','w') as balances:
             json.dump(obj, balances)
         balances.close()
 
 
     @commands.command(brief="free kasa wtf?")
     async def freekasa(self,ctx):
-        with open('balance.json', encoding='utf-8') as json_file:
+        with open('./datafiles/balance.json', encoding='utf-8') as json_file:
             obj = json.load(json_file)
         check = obj.get(str(ctx.message.author))
         if check == 0:
             obj.update({str(ctx.message.author):20})
             await ctx.send(':)')
-        with open('balance.json','w') as balances:
+        with open('./datafiles/balance.json','w') as balances:
                 json.dump(obj, balances)
         balances.close()
         

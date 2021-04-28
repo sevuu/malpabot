@@ -147,8 +147,8 @@ class Utility(commands.Cog):
 
     @commands.command(brief="Status komend używających plików")
     async def filestatus(self,ctx):
-        f = open("iq.txt","r")
-        f2 = open("starzy.txt","r")
+        f = open("./datafiles/iq.txt","r")
+        f2 = open("./datafiles/starzy.txt","r")
         content = f.read()
         content2 = f2.read()
         f.close()

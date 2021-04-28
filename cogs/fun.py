@@ -15,20 +15,20 @@ class Fun(commands.Cog):
 
     @commands.command(brief="IQ Szymona")
     async def iqsobiego(self,ctx):
-        f = open("iq.txt","r")
+        f = open("./datafiles/iq.txt","r")
         content = int(f.read()) - 1
         f.close()
-        f = open("iq.txt","w")
+        f = open("./datafiles/iq.txt","w")
         f.write(str(content))
         f.close()
         await ctx.send(f'Sobi ma {content} IQ')
 
     @commands.command(brief="Pokazuje prawdziwą liczbę ojców Gabriela")
     async def starzygabrysia(self,ctx):
-        f = open("starzy.txt","r")
+        f = open("./datafiles/starzy.txt","r")
         content = int(f.read()) + 1
         f.close()
-        f = open("starzy.txt","w")
+        f = open("./datafiles/starzy.txt","w")
         f.write(str(content))
         f.close()
         await ctx.send(f"Gabryś ma {content} ojców")
@@ -86,7 +86,7 @@ class Fun(commands.Cog):
 
     @commands.command(brief="Nasz kolega :)")
     async def zagusi(self,ctx):
-        f = open('zagus1.txt')
+        f = open('./datafiles/zagus1.txt')
         content = f.read()
         f.close()
         zaguslista = content.splitlines()
