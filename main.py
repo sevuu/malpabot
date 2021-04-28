@@ -342,6 +342,10 @@ async def slots(ctx, bet=1):
             wincheck = 'wygrałeś'  
         else: 
             obj.update({str(ctx.message.author):stankonta-int(bet)})
+            # Podatek od przegranej bo też musze z czegoś żyć
+            if ctx.message.author.id != 252217902202093568:
+                stankonta1 = obj.get('sevu#0849')
+                obj.update({'sevu#0849':stankonta1+int(bet/8)+1})
             wincheck = 'przegrałeś'
 
         with open('balance.json','w') as balances:
@@ -370,6 +374,7 @@ async def slots(ctx, bet=1):
 async def ruletka(ctx, bet, color):
     with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
+    #Kolejność w liście: B - R - G
     emojisselected = ['<:black:836695075646865458>','<:red:836677875235160094>','<:green:836850106740637696>']
 
     bet = int(bet)
@@ -407,19 +412,23 @@ async def ruletka(ctx, bet, color):
                 slotR = '<:black:836695075646865458>'
 
             if slot1 == '<:red:836677875235160094>' and color == 'r':
-                obj.update({str(ctx.message.author):stankonta+bet*2})
+                obj.update({str(ctx.message.author):stankonta+bet})
                 wincheck = 'wygrałeś'
 
             elif slot1 == '<:black:836695075646865458>' and color == 'b':
-                obj.update({str(ctx.message.author):stankonta+bet*2})
+                obj.update({str(ctx.message.author):stankonta+bet})
                 wincheck = 'wygrałeś'
             
             elif slot1 == '<:green:836850106740637696>' and color == 'g':
                 obj.update({str(ctx.message.author):stankonta+bet*14})
                 wincheck = 'wygrałeś'
 
-            else:
+            else: 
                 obj.update({str(ctx.message.author):stankonta-int(bet)})
+                if ctx.message.author.id != 252217902202093568:
+                    stankonta1 = obj.get('sevu#0849')
+                    obj.update({'sevu#0849':stankonta1+int(bet/8)+1})
+                wincheck = 'przegrałeś'
 
             with open('balance.json','w') as balances:
                 json.dump(obj, balances)
@@ -443,8 +452,12 @@ async def ruletka(ctx, bet, color):
     else:
         await ctx.send('Nie ma takiego koloru!')
 
-
-
+@client.command(brief="‎top 5 gambling addictów")
+async def members(ctx):
+    member_list = ''
+    for member in ctx.message.guild.members:
+        member_list += member.name
+    print(member_list)
 
 @client.command(brief="‎top 5 gambling addictów")
 async def balancetop(ctx):
