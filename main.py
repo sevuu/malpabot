@@ -367,10 +367,12 @@ async def slots(ctx, bet=1):
 
 
 @client.command(brief="ruleta")
-async def ruletka(ctx, color, bet=1):
+async def ruletka(ctx, bet, color):
     with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
     emojisselected = ['<:black:836695075646865458>','<:red:836677875235160094>','<:green:836850106740637696>']
+
+    bet = int(bet)
 
     number = random.randint(0,19)
     if (number % 2) == 0 and number != 0:
