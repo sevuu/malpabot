@@ -367,59 +367,79 @@ async def slots(ctx, bet=1):
 
 
 @client.command(brief="ruleta")
-async def ruletka(ctx, color='', bet=1):
+async def ruletka(ctx, color, bet=1):
     with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
-    emojisselected = ['<:black:836695075646865458>','<:red:836677875235160094>']
+    emojisselected = ['<:black:836695075646865458>','<:red:836677875235160094>','<:green:836850106740637696>']
 
-    if str(ctx.message.author) not in obj:
-            obj.update({str(ctx.message.author):50})
-    stankonta = obj.get(str(ctx.message.author))
-    if int(bet) > stankonta:
-        await ctx.send(f'Nie stać cie na to (ale zawsze jest {prefix}freekasa <:tf:805707103628951592>)')
-    elif int(bet) < 1:
-        await ctx.send(f'Chciało sie pocheatować co <:tf:805707103628951592>')
-    else:
-        slot1 = emojisselected[random.randint(0,len(emojisselected)-1)]
+    number = random.randint(0,19)
+    if (number % 2) == 0 and number != 0:
+        slot1 = emojisselected[1]
+    if (number % 2) == 1:
+        slot1 = emojisselected[0]
+    if number == 0:
+        slot1 = emojisselected[2]
 
-        if slot1 == emojisselected[1]:
-            slotL = '<:black:836695075646865458>'
-            slotR = '<:black:836695075646865458>'
-
-        if slot1 == emojisselected[0]:
-            slotL = '<:red:836677875235160094>'
-            slotR = '<:red:836677875235160094>'
-
-        if slot1 == '<:red:836677875235160094>' and color == 'r':
-            obj.update({str(ctx.message.author):stankonta+bet*2})
-            wincheck = 'wygrałeś'
-
-        elif slot1 == '<:black:836695075646865458>' and color == 'b':
-            obj.update({str(ctx.message.author):stankonta+bet*2})
-            wincheck = 'wygrałeś'
-        
+    #wiem że to wygląda okropnie ale jak robiłem to inaczej to nie działało
+    if color == 'r' or color == 'b' or color == 'g': 
+        if str(ctx.message.author) not in obj:
+                obj.update({str(ctx.message.author):50})
+        stankonta = obj.get(str(ctx.message.author))
+        if int(bet) > stankonta:
+            await ctx.send(f'Nie stać cie na to (ale zawsze jest {prefix}freekasa <:tf:805707103628951592>)')
+        elif int(bet) < 1:
+            await ctx.send(f'Chciało sie pocheatować co <:tf:805707103628951592>')
         else:
-            obj.update({str(ctx.message.author):stankonta-int(bet)})
+            # slot1 = emojisselected[random.randint(0,len(emojisselected)-1)]
 
-        with open('balance.json','w') as balances:
-            json.dump(obj, balances)
-        balances.close()
+            if slot1 == emojisselected[1]:
+                slotL = '<:black:836695075646865458>'
+                slotR = '<:black:836695075646865458>'
 
-        embed2=discord.Embed(title=f"Ruletka {ctx.message.author}")
-        embed2.add_field(name="-", value=f"{slotL}", inline=True)
-        embed2.add_field(name="⬇️", value=f"{slot1}", inline=True)
-        embed2.add_field(name="-", value=f"{slotR}", inline=True)
-        embed2.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
+            if slot1 == emojisselected[0]:
+                slotL = '<:red:836677875235160094>'
+                slotR = '<:red:836677875235160094>'
 
-        embed1=discord.Embed(title=f"Ruletka {ctx.message.author}")
-        embed1.add_field(name="-", value=f"<a:roulette:836696081994743879>", inline=True)
-        embed1.add_field(name="⬇️", value=f"<a:roulette2:836697084266676274>", inline=True)
-        embed1.add_field(name="-", value=f"<a:roulette:836696081994743879>", inline=True)
-        embed1.set_footer(text=f"stan konta: ")
+            if slot1 == emojisselected[2]:
+                slotL = '<:red:836677875235160094>'
+                slotR = '<:black:836695075646865458>'
 
-        msg = await ctx.send(embed=embed1)
-        await asyncio.sleep(0.7)
-        await msg.edit(embed=embed2)
+            if slot1 == '<:red:836677875235160094>' and color == 'r':
+                obj.update({str(ctx.message.author):stankonta+bet*2})
+                wincheck = 'wygrałeś'
+
+            elif slot1 == '<:black:836695075646865458>' and color == 'b':
+                obj.update({str(ctx.message.author):stankonta+bet*2})
+                wincheck = 'wygrałeś'
+            
+            elif slot1 == '<:green:836850106740637696>' and color == 'g':
+                obj.update({str(ctx.message.author):stankonta+bet*14})
+                wincheck = 'wygrałeś'
+
+            else:
+                obj.update({str(ctx.message.author):stankonta-int(bet)})
+
+            with open('balance.json','w') as balances:
+                json.dump(obj, balances)
+            balances.close()
+
+            embed2=discord.Embed(title=f"Ruletka {ctx.message.author}")
+            embed2.add_field(name="-", value=f"{slotL}", inline=True)
+            embed2.add_field(name="⬇️", value=f"{slot1}", inline=True)
+            embed2.add_field(name="-", value=f"{slotR}", inline=True)
+            embed2.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
+
+            embed1=discord.Embed(title=f"Ruletka {ctx.message.author}")
+            embed1.add_field(name="-", value=f"<a:roulette:836696081994743879>", inline=True)
+            embed1.add_field(name="⬇️", value=f"<a:roulette2:836697084266676274>", inline=True)
+            embed1.add_field(name="-", value=f"<a:roulette:836696081994743879>", inline=True)
+            embed1.set_footer(text=f"stan konta: ")
+
+            msg = await ctx.send(embed=embed1)
+            await asyncio.sleep(0.7)
+            await msg.edit(embed=embed2)
+    else:
+        await ctx.send('Nie ma takiego koloru!')
 
 
 
