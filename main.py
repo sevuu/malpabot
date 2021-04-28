@@ -1,4 +1,4 @@
-import discord, bottoken, random, asyncio, caesarcipher, os, json, monkies
+import discord, bottoken, random, asyncio, caesarcipher, os, numpy, json, monkies
 from discord import guild
 from discord import voice_client
 from discord import message, FFmpegPCMAudio
@@ -458,7 +458,12 @@ async def crash(ctx, bet, multiplier):
     bet = int(bet)
     with open('balance.json', encoding='utf-8') as json_file:
         obj = json.load(json_file)
-    rndmultiplier = (random.randint(1,100)/10)
+    # Nie mam zielonego pojęcia co ja robie ale wydaje sie działać wystarczająco dobrze
+    rndmultiplier = round(numpy.random.gamma(3.7,0.5),2)
+    if rndmultiplier > 10: # Na wszelki wypadek zabezpieczenie XD
+        rndmultiplier = 10.0
+    if rndmultiplier < 0:   
+        rndmultiplier = 0.1
     stankonta = int(obj.get(str(ctx.message.author)))
     stankonta = float(stankonta)
     if bet > stankonta:
@@ -467,7 +472,7 @@ async def crash(ctx, bet, multiplier):
         await ctx.send(f'Chciało sie pocheatować co <:tf:805707103628951592>')
     elif multiplier <= rndmultiplier:
         obj.update({str(ctx.message.author):stankonta+bet*multiplier})
-        embed=discord.Embed(title="Crash", description=f"Wygrałeś {bet*multiplier}", color=0x00ff08)
+        embed=discord.Embed(title="Crash", description=f"Wygrałeś {round(bet*multiplier,1)}", color=0x00ff08)
         embed.add_field(name="Crashed at:", value=f"{rndmultiplier}", inline=True)
         embed.add_field(name="Twój mnożnik:", value=f"{multiplier}", inline=True)
         embed.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
@@ -479,6 +484,9 @@ async def crash(ctx, bet, multiplier):
         embed.add_field(name="Twój mnożnik:", value=f"{multiplier}", inline=True)
         embed.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
         await ctx.send(embed=embed)
+        if ctx.message.author.id != 252217902202093568:
+            stankonta1 = obj.get('sevu#0849')
+            obj.update({'sevu#0849':stankonta1+int(bet/8)+1})
     with open('balance.json','w') as balances:
         json.dump(obj, balances)
     balances.close()
