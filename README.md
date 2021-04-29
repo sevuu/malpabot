@@ -6,6 +6,6 @@ Bot do ogólnego użytku, którego zrobiłem bo chciałem sie nauczyć języka i
 https://discord.com/oauth2/authorize?client_id=811696300285362207&scope=bot&permissions=8
 
 # instalacja
-no musisz miec python chyba 3.7 wzwyz no i musisz pipem pobrac se moduly z pliku requirements.txt, robisz nowy plik o nazwie bottoken.py w ktorym jest jedna zmienna o nazwie token której wartością jest token z discord developer portalu i odpalasz se normalnie jak szef main.py i gotowe gitara 
+no musisz miec python chyba 3.7 wzwyz no i musisz pipem pobrac se moduly z pliku requirements.txt, w folderze libs robisz nowy plik o nazwie bottoken.py z jedną zmienna o nazwie token której wartością jest token z discord developer portalu i odpalasz se normalnie jak szef main.py i gotowe gitara 
 zeby dzialal cowsay trzeba bota na linuxie odpalic ale to chyba obvious
 
