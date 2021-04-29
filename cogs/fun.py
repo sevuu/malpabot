@@ -13,6 +13,11 @@ class Fun(commands.Cog):
     def __init__(self,client):
         self.client = client
 
+    @commands.command(brief="test")
+    async def test(self,ctx):
+        await ctx.send(f'Siema')
+
+
     @commands.command(brief="IQ Szymona")
     async def iqsobiego(self,ctx):
         f = open("./datafiles/iq.txt","r")

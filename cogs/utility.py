@@ -17,7 +17,7 @@ class Utility(commands.Cog):
 
     @commands.command(brief = "Pong")
     async def ping(self,ctx):
-        await ctx.channel.send(f'Pong! ({round(client.latency*1000)}ms)')
+        await ctx.channel.send(f'Pong! ({round(self.client.latency*1000)}ms)')
 
     
     @commands.command(brief = "test")
