@@ -1,6 +1,11 @@
 # malpabot
-Mój bot taki fajny on ma komendy rozne fajne i jest fajny ogolnie no pod %help jest wszystko i fajnie jest
+Bot do ogólnego użytku, którego zrobiłem bo chciałem sie nauczyć języka i dla zabawy. Dużo inside joke-ów więc niespecjalnie sie nadaje do użytku na innych serwerach.
+%help dla listy komend
+
+# invite link
+https://discord.com/oauth2/authorize?client_id=811696300285362207&scope=bot&permissions=8
 
 # instalacja
 no musisz miec python chyba 3.7 wzwyz no i musisz pipem pobrac se moduly z pliku requirements.txt, robisz nowy plik o nazwie bottoken.py w ktorym jest jedna zmienna o nazwie token której wartością jest token z discord developer portalu i odpalasz se normalnie jak szef main.py i gotowe gitara 
 zeby dzialal cowsay trzeba bota na linuxie odpalic ale to chyba obvious
+
