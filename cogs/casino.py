@@ -192,16 +192,16 @@ class Casino(commands.Cog):
         balances.close()
         
 
-    @commands.command(brief="‎top 5 gambling addictów")
-    async def members(self,ctx):
-        member_list = ''
-        for member in ctx.message.guild.members:
-            member_list += member.name
-        print(member_list)
+    # @commands.command(brief="‎top 5 gambling addictów")
+    # async def members(self,ctx):
+    #     member_list = ''
+    #     for member in ctx.message.guild.members:
+    #         member_list += member.name
+    #     print(member_list)
 
     @commands.command(brief="‎top 5 gambling addictów")
     async def balancetop(self,ctx):
-        with open('balance.json', encoding='utf-8') as f:
+        with open('./datafiles/balance.json', encoding='utf-8') as f:
             gambling = json.load(f)
         marklist = sorted(gambling.items(), key=lambda item: item[1], reverse=True)
         sortdict = dict(marklist)

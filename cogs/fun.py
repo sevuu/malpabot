@@ -15,7 +15,7 @@ class Fun(commands.Cog):
 
     @commands.command(brief="test")
     async def test(self,ctx):
-        await ctx.send(f'Siema')
+        await ctx.send(f'test')
 
 
     @commands.command(brief="IQ Szymona")
@@ -162,6 +162,12 @@ class Fun(commands.Cog):
     # async def pong(self,ctx):
     #     await ctx.send(f"{ctx.message.guild.default_role}  <:tf:805707103628951592>")
 
+    @commands.command(brief = "Losowa piosenka hatsune michael")
+    async def miku(self,ctx):
+        f = open('./datafiles/miku.txt',encoding='utf-8')
+        mikusongs = f.readlines()
+        randommikusong = random.randint(0,len(mikusongs)-1)
+        await ctx.send(mikusongs[randommikusong])
 
     
 def setup(client):

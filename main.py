@@ -24,31 +24,6 @@ async def on_message(message):
         await message.channel.send('łysol')
     await client.process_commands(message)
 
-@client.command(brief = f'Wypisuje "siema" w nieskończoność ({prefix}siema stop aby zatrzymać)')
-async def siema(ctx, enabled="start",interval = 2):
-    if enabled.lower() == "stop":
-        siemaInterval.stop()
-    elif enabled.lower() == "start":
-        siemaInterval.change_interval(seconds = int(interval))
-        siemaInterval.start(ctx)
-@tasks.loop(seconds=2, count=50)
-async def siemaInterval(ctx):
-        await ctx.send("siema")
-
-@client.command(brief = f'Cumil Ślimak')
-async def slimak(ctx, enabled="start",interval = 3599):
-    if enabled.lower() == "stop":
-        cumilInterval.stop()
-    elif enabled.lower() == "start":
-        cumilInterval.change_interval(seconds = int(interval))
-        cumilInterval.start(ctx)
-@tasks.loop(seconds=5)
-async def cumilInterval(ctx):
-    f = open('./datafiles/slimak.txt',encoding='utf-8')
-    slimakhuj = f.readlines()
-    # await asyncio.sleep(0.01)   #nie wiem po co to tu w sumie dałem ale dla pewności zostawie bo czemu nie
-    randomslimak = random.randint(0,len(slimakhuj)-1)
-    await ctx.send(slimakhuj[randomslimak])
 
 @client.command()
 async def load(ctx,extension):
