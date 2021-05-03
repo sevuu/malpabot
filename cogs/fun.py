@@ -161,24 +161,24 @@ class Fun(commands.Cog):
         await ctx.send('‎\n'*40)
 
         
-    @commands.command(brief = "super quiz :)", description = "bajerancki quizior :D")
-    async def avatarquiz(self,ctx):
-        avatary = os.listdir('avatar')
-        los = random.randint(0,len(avatary)-1)
-        filename = avatary[los]
-        f = open(f'./avatar/{filename[:-4]}.png', 'rb')
-        file = discord.File(f)
-        await ctx.send("Zgadnij czyj to avatar:")
-        await ctx.send(file=file)
+    # @commands.command(brief = "super quiz :)", description = "bajerancki quizior :D")
+    # async def avatarquiz(self,ctx):
+    #     avatary = os.listdir('./media/avatar')
+    #     los = random.randint(0,len(avatary)-1)
+    #     filename = avatary[los]
+    #     f = open(f'./media/avatar/{filename[:-4]}.png', 'rb')
+    #     file = discord.File(f)
+    #     await ctx.send("Zgadnij czyj to avatar:")
+    #     await ctx.send(file=file)
 
-        def check(msg):
-            return msg.channel == ctx.channel
+    #     def check(msg):
+    #         return msg.channel == ctx.channel
 
-        msg = await client.wait_for("message", check=check)
-        if msg.content.lower() == f"{filename[:-4]}":
-            await ctx.send("Brawo :)")
-        else:
-            await ctx.send("Debil")
+    #     msg = await client.wait_for("message", check=check)
+    #     if msg.content.lower() == f"{filename[:-4]}":
+    #         await ctx.send("Brawo :)")
+    #     else:
+    #         await ctx.send("Debil")
 
     @commands.command(brief = "MMA Fighter")
     async def zagus(self,ctx):
