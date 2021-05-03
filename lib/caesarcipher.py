@@ -1,4 +1,4 @@
-# zajebalem to wszystko z internetu bo mi sie nie chcialo samemu pisać przepraszam jeśli kogos zawiodlem c;
+# zajebalem to wszystko z internetu bo mi sie nie chcialo samemu myslec sory
 def cipher_encrypt(plain_text, key):
 
     encrypted = ""
