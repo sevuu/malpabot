@@ -159,7 +159,7 @@ class Casino(commands.Cog):
         with open('./datafiles/balance.json', encoding='utf-8') as json_file:
             obj = json.load(json_file)
         # Nie mam zielonego pojęcia co ja robie ale wydaje sie działać wystarczająco dobrze
-        rndmultiplier = round(numpy.random.gamma(3.7,0.5),2)
+        rndmultiplier = round(numpy.random.gamma(1.4,0.5),2)
         if rndmultiplier > 10: # Na wszelki wypadek zabezpieczenie XD
             rndmultiplier = 10.0
         if rndmultiplier < 0:   
@@ -171,7 +171,9 @@ class Casino(commands.Cog):
         elif bet < 1:
             await ctx.send(f'Chciało sie pocheatować co <:tf:805707103628951592>')
         elif multiplier <= rndmultiplier:
-            obj.update({str(ctx.message.author):stankonta+bet*multiplier})
+            win = int(bet*multiplier)
+            stankonta = int(stankonta)
+            obj.update({str(ctx.message.author):stankonta+win})           
             embed=discord.Embed(title="Crash", description=f"Wygrałeś {round(bet*multiplier,1)}", color=0x00ff08)
             embed.add_field(name="Crashed at:", value=f"{rndmultiplier}", inline=True)
             embed.add_field(name="Twój mnożnik:", value=f"{multiplier}", inline=True)

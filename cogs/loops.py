@@ -1,8 +1,5 @@
-import discord, random, asyncio, os
-from discord import message
+import random
 from discord.ext import commands
-from discord.ext.commands import has_permissions
-from translate import Translator
 from discord.ext import commands, tasks
 
 

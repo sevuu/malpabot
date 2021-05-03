@@ -100,7 +100,26 @@ class Fun(commands.Cog):
             await asyncio.sleep(1)
             await msg.edit(content=i)
 
-        
+    @commands.command(brief="troled")
+    async def tf(self,ctx):
+        f = open('./datafiles/tf.txt')
+        content = f.read()
+        f.close()
+        trollista = content.splitlines()    
+        for i in trollista:
+            await ctx.send(content=i)
+            await asyncio.sleep(0.8)      
+
+    @commands.command(brief="amogus")
+    async def amogus(self,ctx):
+        f = open('./datafiles/amogus.txt')
+        content = f.read()
+        f.close()
+        amoguslista = content.splitlines()    
+        for i in amoguslista:
+            await ctx.send(content=i)
+            await asyncio.sleep(0.8)
+                
     @commands.command(brief = "Wynik z dodawania")
     async def sum(self,ctx, x, y):
         try:
