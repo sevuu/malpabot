@@ -1,7 +1,7 @@
 import discord, random, asyncio, os
 from discord.ext import commands
 from hentai import Hentai, Format
-from lib import  caesarcipher, monkies
+from lib import  caesarcipher, monkies, morsecode
 
 
 
@@ -17,6 +17,13 @@ class Fun(commands.Cog):
     async def test(self,ctx):
         await ctx.send(f'test')
 
+    @commands.command(brief="test")
+    async def morseencrypt(self,ctx, *,msg):
+        await ctx.send(morsecode.morseEncrypt(msg))
+
+    @commands.command(brief="test")
+    async def morsedecrypt(self,ctx, *,msg):
+        await ctx.send(morsecode.morseDecrypt(msg))
 
     @commands.command(brief="IQ Szymona")
     async def iqsobiego(self,ctx):
