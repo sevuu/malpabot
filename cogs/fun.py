@@ -17,12 +17,12 @@ class Fun(commands.Cog):
     async def test(self,ctx):
         await ctx.send(f'test')
 
-    @commands.command(brief="test")
-    async def morseencrypt(self,ctx, *,msg):
+    @commands.command(brief="Wiadomość kodem Morse'a")
+    async def morse(self,ctx,*,msg):
         await ctx.send(morsecode.morseEncrypt(msg))
 
-    @commands.command(brief="test")
-    async def morsedecrypt(self,ctx, *,msg):
+    @commands.command(brief="Odszyfrowuje wiadomość zapisaną kodem Morse'a")
+    async def morsedecrypt(self,ctx,*,msg):
         await ctx.send(morsecode.morseDecrypt(msg))
 
     @commands.command(brief="IQ Szymona")
