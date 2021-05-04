@@ -49,10 +49,10 @@ class Fun(commands.Cog):
     async def nhentai(self,ctx):
         FBI = True
         while FBI:
-            id = random.randint(1,356714)
+            id = random.randint(1,356714)   # Generating random nhentai ID
             doujin = Hentai(id)
             tagi = [tag.name for tag in doujin.tag]
-            blacklist = ["lolicon","shotacon","rape","incest","scat"]
+            blacklist = ["lolicon","shotacon","rape","incest","scat"]   # blacklisted tags
             check = any(item in tagi for item in blacklist)
             if check is False:
                 embed=discord.Embed(title=doujin.title(Format.Pretty),url=f"https://nhentai.net/g/{id}/",description=f"#{id}",color=discord.Color.purple())
