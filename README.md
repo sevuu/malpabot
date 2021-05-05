@@ -6,9 +6,13 @@ Bot do ogólnego użytku, którego zrobiłem bo chciałem sie nauczyć języka i
 https://discord.com/oauth2/authorize?client_id=811696300285362207&scope=bot&permissions=8
 
 # instalacja
-no musisz miec python chyba 3.7 wzwyz no i musisz pipem pobrac se moduly z pliku requirements.txt, w folderze libs robisz nowy plik o nazwie bottoken.py z jedną zmienna o nazwie token której wartością jest token z discord developer portalu i odpalasz se normalnie jak szef main.py i gotowe gitara 
-zeby dzialal cowsay trzeba bota na linuxie odpalic ale to chyba obvious  
-jak cos nie dziala na raspberry pi to to powinno pomoc  
+Wymagany jest python 3.7 wzwyż, starsze powinny działać ale niektóre komendy mogą być zepsute. 
+
+W folderze z botem:  
+`pip install -r requirements.txt`  
+Utwórz plik **bottoken.py** w folderze **lib** i wpisz  
+`token = "twójtoken"`  
+Jak coś nie działa na raspberry pi to to powinno pomóc:    
 `sudo apt-get install libatlas-base-dev`
 
 
