@@ -163,6 +163,7 @@ class Fun(commands.Cog):
         
     # @commands.command(brief = "super quiz :)", description = "bajerancki quizior :D")
     # async def avatarquiz(self,ctx):
+    
     #     avatary = os.listdir('./media/avatar')
     #     los = random.randint(0,len(avatary)-1)
     #     filename = avatary[los]
