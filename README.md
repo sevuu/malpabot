@@ -7,7 +7,9 @@ https://discord.com/oauth2/authorize?client_id=811696300285362207&scope=bot&perm
 
 # instalacja
 no musisz miec python chyba 3.7 wzwyz no i musisz pipem pobrac se moduly z pliku requirements.txt, w folderze libs robisz nowy plik o nazwie bottoken.py z jedną zmienna o nazwie token której wartością jest token z discord developer portalu i odpalasz se normalnie jak szef main.py i gotowe gitara 
-zeby dzialal cowsay trzeba bota na linuxie odpalic ale to chyba obvious
+zeby dzialal cowsay trzeba bota na linuxie odpalic ale to chyba obvious  
+jak cos nie dziala na raspberry pi to to powinno pomoc  
+`sudo apt-get install libatlas-base-dev`
 
 
 # additional notes
