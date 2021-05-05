@@ -158,7 +158,7 @@ class Fun(commands.Cog):
 
     @commands.command(brief="‎")
     async def nic(self,ctx):
-        await ctx.send('‎\n'*40)
+        await ctx.send('‎\n'*50)
 
         
     # @commands.command(brief = "super quiz :)", description = "bajerancki quizior :D")
