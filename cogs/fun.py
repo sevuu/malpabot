@@ -15,7 +15,7 @@ class Fun(commands.Cog):
 
     @commands.command(brief="test")
     async def test(self,ctx):
-        await ctx.send(f'test')
+        await ctx.send(f'gittest')
 
     @commands.command(brief="Wiadomość kodem Morse'a")
     async def morse(self,ctx,*,msg):
@@ -45,11 +45,11 @@ class Fun(commands.Cog):
         f.close()
         await ctx.send(f"Gabryś ma {content} ojców")
 
-    @commands.command(brief="Randomowa strona nhentai do id 356714 :)")
+    @commands.command(brief="Randomowa strona nhentai do id 358032 :)")
     async def nhentai(self,ctx):
         FBI = True
         while FBI:
-            id = random.randint(1,356714)   # Generating random nhentai ID
+            id = random.randint(1,358032)   # Generating random nhentai ID
             doujin = Hentai(id)
             tagi = [tag.name for tag in doujin.tag]
             blacklist = ["lolicon","shotacon","rape","incest","scat"]   # blacklisted tags
