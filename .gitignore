@@ -16,3 +16,7 @@ lib/__pycache__/__init__.cpython-39.pyc
 cogs/__pycache__/casino.cpython-39.pyc
 cogs/__pycache__/utility.cpython-39.pyc
 cogs/__pycache__/fun.cpython-39.pyc
+
+cogs/__pycache__/funn.cpython-39.pyc
+cogs/__pycache__/loops.cpython-39.pyc
+lib/__pycache__/morsecode.cpython-39.pyc

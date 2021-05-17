@@ -1,6 +1,5 @@
-import discord, random, asyncio, os
+import discord, random, asyncio, os, hentai
 from discord.ext import commands
-from hentai import Hentai, Format
 from lib import  caesarcipher, monkies, morsecode
 
 
@@ -45,17 +44,17 @@ class Fun(commands.Cog):
         f.close()
         await ctx.send(f"Gabryś ma {content} ojców")
 
-    @commands.command(brief="Randomowa strona nhentai do id 358032 :)")
+    @commands.command(brief="Randomowa strona nhentai do id 359399 :)")
     async def nhentai(self,ctx):
         FBI = True
         while FBI:
-            id = random.randint(1,358032)   # Generating random nhentai ID
-            doujin = Hentai(id)
+            id = random.randint(1,359399)   # Generating random nhentai ID
+            doujin = hentai.Hentai(id)
             tagi = [tag.name for tag in doujin.tag]
             blacklist = ["lolicon","shotacon","rape","incest","scat"]   # blacklisted tags
             check = any(item in tagi for item in blacklist)
             if check is False:
-                embed=discord.Embed(title=doujin.title(Format.Pretty),url=f"https://nhentai.net/g/{id}/",description=f"#{id}",color=discord.Color.purple())
+                embed=discord.Embed(title=doujin.title(hentai.Pretty),url=f"https://nhentai.net/g/{id}/",description=f"#{id}",color=discord.Color.purple())
                 embed.set_thumbnail(url=doujin.image_urls[0])
                 embed.add_field(name="Tags", value=", ".join(tagi), inline=False)
                 await ctx.send(embed=embed)
@@ -81,10 +80,10 @@ class Fun(commands.Cog):
     async def ligalegend(self,ctx):
         await ctx.channel.send('Liga Legend to kurwa, nie graj w to')
 
-    @commands.command(brief="krowa mówi wtf?", description='https://en.wikipedia.org/wiki/Cowsay')
-    async def cowsay(self,ctx,*,msg):
-        myCmd = os.popen(f'cowsay {msg}').read()
-        await ctx.send(f'```{myCmd}```')
+#    @commands.command(brief="krowa mówi wtf?", description='https://en.wikipedia.org/wiki/Cowsay')
+#    async def cowsay(self,ctx,*,msg):
+#        myCmd = os.popen(f'cowsay {msg}').read()
+#        await ctx.send(f'```{myCmd}```')
 
     @commands.command(brief="Losowy fakt")
     async def randomfact(self,ctx):
@@ -112,21 +111,21 @@ class Fun(commands.Cog):
         f = open('./datafiles/tf.txt')
         content = f.read()
         f.close()
-        trollista = content.splitlines()    
+        trollista = content.splitlines()
         for i in trollista:
             await ctx.send(content=i)
-            await asyncio.sleep(0.8)      
+            await asyncio.sleep(0.8)
 
     @commands.command(brief="amogus")
     async def amogus(self,ctx):
         f = open('./datafiles/amogus.txt')
         content = f.read()
         f.close()
-        amoguslista = content.splitlines()    
+        amoguslista = content.splitlines()
         for i in amoguslista:
             await ctx.send(content=i)
             await asyncio.sleep(0.8)
-                
+
     @commands.command(brief = "Wynik z dodawania")
     async def sum(self,ctx, x, y):
         try:
@@ -160,10 +159,10 @@ class Fun(commands.Cog):
     async def nic(self,ctx):
         await ctx.send('‎\n'*50)
 
-        
+
     # @commands.command(brief = "super quiz :)", description = "bajerancki quizior :D")
     # async def avatarquiz(self,ctx):
-    
+
     #     avatary = os.listdir('./media/avatar')
     #     los = random.randint(0,len(avatary)-1)
     #     filename = avatary[los]
@@ -196,6 +195,6 @@ class Fun(commands.Cog):
         randommikusong = random.randint(0,len(mikusongs)-1)
         await ctx.send(mikusongs[randommikusong])
 
-    
+
 def setup(client):
     client.add_cog(Fun(client))
