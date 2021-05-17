@@ -19,12 +19,12 @@ class Utility(commands.Cog):
     async def ping(self,ctx):
         await ctx.channel.send(f'Pong! ({round(self.client.latency*1000)}ms)')
 
-    
-    @commands.command(brief = "test")
-    async def dmtest(self,ctx, uid,*,msg):
-        user = await client.fetch_user(uid)
-        channel = await user.create_dm()
-        await channel.send(msg)
+
+#    @commands.command(brief = "test")
+#    async def dmtest(self,ctx, uid,*,msg):
+#        user = await client.fetch_user(uid)
+#        channel = await user.create_dm()
+#        await channel.send(msg)
 
     @commands.command(brief="Pokazuje informacje o Tobie albo o oznaczonej osobie")
     async def id(self,ctx):
@@ -68,20 +68,20 @@ class Utility(commands.Cog):
             embed.set_image(url = ctx.author.avatar_url)
             await ctx.send(embed=embed)
 
-    @client.command(brief = f"Avatar ale wpisujesz id i tlye w sumie xd")
-    async def avatarid(self,ctx, id):
-        user = await client.fetch_user(id)
-        embed=discord.Embed(title='', color=0xFF5733)
-        embed.set_image(url = user.avatar_url)
-        await ctx.send(embed=embed)
+#    @client.command(brief = f"Avatar ale wpisujesz id i tlye w sumie xd")
+#    async def avatarid(self,ctx, id):
+#        user = await client.fetch_user(id)
+#        embed=discord.Embed(title='', color=0xFF5733)
+#        embed.set_image(url = user.avatar_url)
+#        await ctx.send(embed=embed)
 
     @client.command(brief = f"Ankieta")
     async def poll(self,ctx, a, b=None, c=None, d=None, e=None, f=None):
         emojis = ['\U0001F1E6']
         if b == None:
-            await ctx.send("podaj przynajmniej dwa argumenty") 
+            await ctx.send("podaj przynajmniej dwa argumenty")
         if b != None:
-            mytitle = f'{a} czy {b}' 
+            mytitle = f'{a} czy {b}'
         if c != None:
             mytitle = mytitle + f' czy {c}'
         if d != None:
@@ -114,7 +114,7 @@ class Utility(commands.Cog):
         msg = await ctx.send(embed=embed)
         for emoji in emojis:
             await message.Message.add_reaction(msg, emoji)
-            await asyncio.sleep(0.5)    
+            await asyncio.sleep(0.5)
 
     @commands.command(brief="Losuje randomową liczbę w wybranym zakresie")
     async def roll(self,ctx,a,b):
@@ -124,7 +124,7 @@ class Utility(commands.Cog):
     @has_permissions(manage_messages=True)
     async def clear(self,ctx,amount=1):
         if ctx.message.author.id == 328989571947823104 or ctx.message.author.id == 252217902202093568:
-            if amount <= 20: 
+            if amount <= 20:
                 await ctx.channel.purge(limit=amount+1)
             else:
                 await ctx.channel.send('pojebalo cie chyba')
