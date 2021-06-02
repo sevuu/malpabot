@@ -2,7 +2,7 @@ import discord, random, asyncio, os, hentai
 from discord.ext import commands
 from lib import  caesarcipher, monkies, morsecode
 
-
+#dick
 
 prefix = '%'
 client = commands.Bot(command_prefix = prefix)
@@ -179,6 +179,12 @@ class Fun(commands.Cog):
     #         await ctx.send("Brawo :)")
     #     else:
     #         await ctx.send("Debil")
+    @commands.command(brief = "Wojtek of the wisdom")
+    async def wojtek(self,ctx):
+        embed=discord.Embed(title="Wojtek of the wisdom")
+        embed.add_field(name="Wojtek mówi:", value="pierdol sie", inline=False)
+        embed.set_image(url="https://i.imgur.com/6UmHSH6.png")
+        await ctx.send(embed=embed)
 
     @commands.command(brief = "MMA Fighter")
     async def zagus(self,ctx):
