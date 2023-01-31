@@ -181,27 +181,6 @@ class Fun(commands.Cog):
         await ctx.send('‎\n'*50)
 
 
-    # @commands.command(brief = "super quiz :)", description = "bajerancki quizior :D")
-    # async def avatarquiz(self,ctx):
-
-    #     avatary = os.listdir('./media/avatar')
-    #     los = random.randint(0,len(avatary)-1)
-    #     filename = avatary[los]
-    #     f = open(f'./media/avatar/{filename[:-4]}.png', 'rb')
-    #     file = discord.File(f)
-    #     await ctx.send("Zgadnij czyj to avatar:")
-    #     await ctx.send(file=file)
-
-    #     def check(msg):
-    #         return msg.channel == ctx.channel
-
-    #     msg = await client.wait_for("message", check=check)
-    #     if msg.content.lower() == f"{filename[:-4]}":
-    #         await ctx.send("Brawo :)")
-    #     else:
-    #         await ctx.send("Debil")
-
-
     @commands.command(brief = "Wojtek of the wisdom")
     async def wojtek(self,ctx):
         embed=discord.Embed(title="Wojtek of the wisdom")
@@ -227,9 +206,6 @@ class Fun(commands.Cog):
     async def zagus(self,ctx):
         await ctx.channel.send(f':grinning: :right_facing_fist: :woman_red_haired:')
 
-    # @commands.command(brief=":tf:")
-    # async def pong(self,ctx):
-    #     await ctx.send(f"{ctx.message.guild.default_role}  <:tf:805707103628951592>")
 
     @commands.command(brief = "Losowa piosenka hatsune michael")
     async def miku(self,ctx):

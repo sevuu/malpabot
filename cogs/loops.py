@@ -34,7 +34,6 @@ class Loops(commands.Cog):
     async def cumilInterval(self,ctx):
         f = open('./datafiles/slimak.txt',encoding='utf-8')
         slimakhuj = f.readlines()
-        # await asyncio.sleep(0.01)   #nie wiem po co to tu w sumie dałem ale dla pewności zostawie bo czemu nie
         randomslimak = random.randint(0,len(slimakhuj)-1)
         await ctx.send(slimakhuj[randomslimak])
 
