@@ -1,8 +1,7 @@
-import discord, random, asyncio, os, hentai
+import discord, random, asyncio, os, requests
 from discord.ext import commands
-from lib import  caesarcipher, monkies, morsecode
-
-#dick
+from bs4 import BeautifulSoup
+from lib import caesarcipher, monkies, morsecode
 
 prefix = '%'
 client = commands.Bot(command_prefix = prefix)
@@ -16,6 +15,20 @@ class Fun(commands.Cog):
     async def test(self,ctx):
         await ctx.send(f'gittest')
 
+    @client.command()
+    async def status(self, ctx, member : discord.Member=None):
+        if member is None:
+            member = ctx.author
+        embed=discord.Embed(title=f"{member.name} your current status is", description= f'{member.activities[0].name}', color=0xcd32a7)
+        await ctx.send(embed=embed)
+
+    @commands.command(brief="yes..")
+    async def ben(self,ctx,*,msg):
+        audio = os.listdir('./media/ben/')
+        audioString = random.choice(audio)  # Selects a random element from the list
+        path = "./media/ben/" + audioString
+        await ctx.send(file=discord.File(path))
+        
     @commands.command(brief="Wiadomość kodem Morse'a")
     async def morse(self,ctx,*,msg):
         await ctx.send(morsecode.morseEncrypt(msg))
@@ -44,19 +57,25 @@ class Fun(commands.Cog):
         f.close()
         await ctx.send(f"Gabryś ma {content} ojców")
 
-    @commands.command(brief="Randomowa strona nhentai do id 359399 :)")
+    @commands.command(brief="Randomowa stronka nhentai :D")
     async def nhentai(self,ctx):
         FBI = True
         while FBI:
-            id = random.randint(1,359399)   # Generating random nhentai ID
-            doujin = hentai.Hentai(id)
-            tagi = [tag.name for tag in doujin.tag]
-            blacklist = ["lolicon","shotacon","rape","incest","scat"]   # blacklisted tags
-            check = any(item in tagi for item in blacklist)
+            id = random.randint(1,439759)
+            source = requests.get(f'https://nhentai-net.translate.goog/g/{id}/?_x_tr_sl=auto&_x_tr_tl=pl&_x_tr_hl=pl&_x_tr_pto=wapp').text
+            soup = BeautifulSoup(source, features="html.parser")
+            title = soup.find("meta", attrs={'itemprop': 'name'})
+            image = soup.find("meta", attrs={'itemprop': 'image'})
+            tags = soup.find("meta", attrs={'name': 'twitter:description'})
+
+            tagslist = tags["content"].split(', ')
+            blacklist = []
+
+            check = any(item in tagslist for item in blacklist)
             if check is False:
-                embed=discord.Embed(title=doujin.title(hentai.Pretty),url=f"https://nhentai.net/g/{id}/",description=f"#{id}",color=discord.Color.purple())
-                embed.set_thumbnail(url=doujin.image_urls[0])
-                embed.add_field(name="Tags", value=", ".join(tagi), inline=False)
+                embed=discord.Embed(title=title["content"] if title is not None else "Brak tytułu", url=f'https://nhentai.net/g/{id}')
+                embed.set_thumbnail(url=image["content"])
+                embed.add_field(name="Tagi: ", value=tags["content"] if tags is not None else "Brak tagów", inline=False)
                 await ctx.send(embed=embed)
                 FBI = False
             else:
@@ -126,6 +145,8 @@ class Fun(commands.Cog):
             await ctx.send(content=i)
             await asyncio.sleep(0.8)
 
+
+ 
     @commands.command(brief = "Wynik z dodawania")
     async def sum(self,ctx, x, y):
         try:
@@ -179,12 +200,28 @@ class Fun(commands.Cog):
     #         await ctx.send("Brawo :)")
     #     else:
     #         await ctx.send("Debil")
+
+
     @commands.command(brief = "Wojtek of the wisdom")
     async def wojtek(self,ctx):
         embed=discord.Embed(title="Wojtek of the wisdom")
         embed.add_field(name="Wojtek mówi:", value="pierdol sie", inline=False)
         embed.set_image(url="https://i.imgur.com/6UmHSH6.png")
         await ctx.send(embed=embed)
+
+
+    @commands.command(brief = "Scav, Tetris, Wywóz.")
+    async def stw(self,ctx):
+        embed=discord.Embed(title="STW S.A z.o.o.- Scav, Tetris, Wywóz", description="Młoda firma utworzona w 2023 r. specjalizująca się w usłudze sprzątania nie tylko przedmiotów oraz transporcie dóbr materialnych na terenie miasta Tarkov położonego na terenie Rosji. ", color=0x00ffcc)
+        embed.add_field(name=" ", value="Usługi scav (pmc na własne ryzyko!) których się podejmujemy: - eksploracja miasta wraz z poszukiwaniem przedmiotów - Eliminowanie przeciwników na terenie miasta Tarkov - Sprzątanie oraz układanie miejsca w schowkach - Wykonywanie zleceń handlarzy - Sprzedaż przedmiotów na rynku - Usługa jako trener personalny na twojej własnej siłowni w kryjówce - Rozbudowa kryjówki - Odbieranie oraz robienie zrzutów ekranu przyniesionych przedmiotów od pracownika SCAV -  Wysyłanie pracownika SCAV na poszukiwanie nowych przedmiotów w rejonie miasta Tarkov", inline=True)
+        embed.add_field(name="W razie jakichkolwiek pytań lub wyceny danych usług prosimy o kontakt do naszego biura.", value=" ", inline=False)
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/338268917497856001/1069989635167629343/LOGO.png")
+        embed.set_image(url="https://cdn.discordapp.com/attachments/338268917497856001/1069989638774734899/nie_wiem_srednio_wyszlo_2.png")
+        embed.add_field(name="Dane firmy:", value="STW sa. z.o.o.- scav, tetris, wywóz Nikitskaya st. 48 (na przeciwko teatru) 171271 Tarkov NIP: 11037 KRS: 251003", inline=False)
+        embed.add_field(name="Biuro: ", value="- Czechubuisnes@wp.pl \n - czechu#8854 (okres oczekiwania: od razu - 1 dzień)", inline=False)
+        embed.set_footer(text=" Zarejestrowana przez Sąd Rejonowy dla Tarkova-Śródmieścia w Tarkovie XIX Wydział Gospodarczy KRS.Wysokość kapitału zakładowego: 32,21 RUB")
+        await ctx.send(embed=embed)
+    
 
     @commands.command(brief = "MMA Fighter")
     async def zagus(self,ctx):
@@ -200,7 +237,6 @@ class Fun(commands.Cog):
         mikusongs = f.readlines()
         randommikusong = random.randint(0,len(mikusongs)-1)
         await ctx.send(mikusongs[randommikusong])
-
 
 def setup(client):
     client.add_cog(Fun(client))

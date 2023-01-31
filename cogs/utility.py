@@ -1,4 +1,6 @@
-import discord, random, asyncio, os
+import discord, random, asyncio,os
+from discord.player import FFmpegOpusAudio
+import youtube_dl
 from discord import message
 from discord.ext import commands
 from discord.ext.commands import has_permissions
@@ -9,6 +11,7 @@ from translate import Translator
 
 prefix = '%'
 client = commands.Bot(command_prefix = prefix)
+queue = []
 
 class Utility(commands.Cog):
 
@@ -19,12 +22,6 @@ class Utility(commands.Cog):
     async def ping(self,ctx):
         await ctx.channel.send(f'Pong! ({round(self.client.latency*1000)}ms)')
 
-
-#    @commands.command(brief = "test")
-#    async def dmtest(self,ctx, uid,*,msg):
-#        user = await client.fetch_user(uid)
-#        channel = await user.create_dm()
-#        await channel.send(msg)
 
     @commands.command(brief="Pokazuje informacje o Tobie albo o oznaczonej osobie")
     async def id(self,ctx):
@@ -169,6 +166,78 @@ class Utility(commands.Cog):
     async def nick(self,ctx, member: discord.Member,*, nick):
         await member.edit(nick=nick)
         await ctx.send(f'Zmieniono nick {member} na: {member.mention} ')
+
+
+
+    # @commands.command()
+    # async def join(self, ctx):
+    #     if ctx.author.voice is None:
+    #         ctx.send("nigger ngigger niger")
+    #     voice_channel = ctx.author.voice.channel
+    #     if ctx.voice_client is None:
+    #         await voice_channel.connect()
+
+    # @commands.command()
+    # async def disconnect(self, ctx):
+    #     await ctx.voice_client.disconnect()
+
+    # @commands.command()
+    # async def play(self, ctx, url):
+    #     global queue
+    #     queue.append(url)
+    #     if ctx.author.voice is None:
+    #         ctx.send("wejdz na kanal moze najpierw")
+    #     elif 'http' not in url:
+    #         ctx.send('to nie link debilu')
+    #     else:
+    #         voice_channel = ctx.author.voice.channel
+    #         if ctx.voice_client is None:
+    #             await voice_channel.connect()
+    #         ctx.voice_client.stop()
+    #         FFMPEG_OPTIONS = {
+    #             "before_options":"-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5",
+    #             "options": "-vn"
+    #         }
+    #         YDL_OPTIONS = {"format":"bestaudio"}
+    #         vc = ctx.voice_client
+    #         while queue[0] != None:
+    #             try:
+    #                 with youtube_dl.YoutubeDL(YDL_OPTIONS) as ydl:
+    #                     info = ydl.extract_info(queue[0], download=False)
+    #                     url2 = info["formats"][0]["url"]
+    #                     source = await discord.FFmpegOpusAudio.from_probe(url2, **FFMPEG_OPTIONS)
+    #                     queue.pop(0)
+    #                     vc.play(source)
+    #             except:
+    #                 ctx.channel.send("cos sie zesralo")
+        
+    
+    # @commands.command()
+    # async def pause(self, ctx):
+    #     await ctx.send("pauza")
+    #     await ctx.voice_client.pause()
+        
+    # @commands.command()
+    # async def resume(self, ctx):
+    #     await ctx.send("wznowiono")
+    #     await ctx.voice_client.resume()
+        
+    
+    # @commands.command()
+    # async def skip(self, ctx):
+    #     await ctx.channel.send("skip")
+    #     await ctx.voice_client.stop()
+
+    # @commands.command()
+    # async def loop(self, ctx):
+    #     await ctx.channel.send("skip")
+    #     await ctx.voice_client.stop()
+        
+    
+        
+
+    
+            
 
 def setup(client):
     client.add_cog(Utility(client))

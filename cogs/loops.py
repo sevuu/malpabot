@@ -24,7 +24,7 @@ class Loops(commands.Cog):
             await ctx.send("siema")
 
     @client.command(brief = f'Cumil Ślimak')
-    async def slimak(self,ctx, enabled="start",interval = 3599):
+    async def slimak(self,ctx, enabled="start",interval = 3600):
         if enabled.lower() == "stop":
             self.cumilInterval.stop()
         elif enabled.lower() == "start":

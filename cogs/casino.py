@@ -30,23 +30,19 @@ class Casino(commands.Cog):
 
             if slot1 == slot2 == slot3 == '<:diamond:836303727093743707>':
                 obj.update({str(ctx.message.author):stankonta+bet*25})
-                wincheck = 'wygrałeś'
+                # wincheck = 'wygrałeś'
             elif slot1 == slot2 == slot3 == '<:monke:836303742034247752>':
                 obj.update({str(ctx.message.author):stankonta+bet*50})
-                wincheck = 'wygrałeś'
+                # wincheck = 'wygrałeś'
             elif slot1 == slot2 == slot3 == '<:slots7:835924846072430592>':
                 obj.update({str(ctx.message.author):stankonta+bet*75})
-                wincheck = 'wygrałeś'
+                # wincheck = 'wygrałeś'
             elif slot1 == slot2 == slot3 == '<:kuc:734732791413211186>':
                 obj.update({str(ctx.message.author):stankonta+bet*5})
-                wincheck = 'wygrałeś'  
+                # wincheck = 'wygrałeś'
             else: 
                 obj.update({str(ctx.message.author):stankonta-int(bet)})
-                # Podatek od przegranej bo też musze z czegoś żyć
-                if ctx.message.author.id != 252217902202093568:
-                    stankonta1 = obj.get('sevu#0849')
-                    obj.update({'sevu#0849':stankonta1+int(bet/8)+1})
-                wincheck = 'przegrałeś'
+                # wincheck = 'przegrałeś'
 
             with open('./datafiles/balance.json','w') as balances:
                 json.dump(obj, balances)
@@ -113,22 +109,19 @@ class Casino(commands.Cog):
 
                 if slot1 == '<:red:836677875235160094>' and color == 'r':
                     obj.update({str(ctx.message.author):stankonta+bet})
-                    wincheck = 'wygrałeś'
+                    # wincheck = 'wygrałeś'
 
                 elif slot1 == '<:black:836695075646865458>' and color == 'b':
                     obj.update({str(ctx.message.author):stankonta+bet})
-                    wincheck = 'wygrałeś'
+                    # wincheck = 'wygrałeś'
                 
                 elif slot1 == '<:green:836850106740637696>' and color == 'g':
                     obj.update({str(ctx.message.author):stankonta+bet*14})
-                    wincheck = 'wygrałeś'
+                    # wincheck = 'wygrałeś'
 
                 else: 
                     obj.update({str(ctx.message.author):stankonta-int(bet)})
-                    if ctx.message.author.id != 252217902202093568:
-                        stankonta1 = obj.get('sevu#0849')
-                        obj.update({'sevu#0849':stankonta1+int(bet/8)+1})
-                    wincheck = 'przegrałeś'
+                    # wincheck = 'przegrałeś'
 
                 with open('./datafiles/balance.json','w') as balances:
                     json.dump(obj, balances)
@@ -156,50 +149,47 @@ class Casino(commands.Cog):
     async def crash(self, ctx, bet, multiplier):
         multiplier = float(multiplier)
         bet = int(bet)
-        with open('./datafiles/balance.json', encoding='utf-8') as json_file:
-            obj = json.load(json_file)
-        # Nie mam zielonego pojęcia co ja robie ale wydaje sie działać wystarczająco dobrze
-        rndmultiplier = round(numpy.random.gamma(1.4,0.5),2)
-        if rndmultiplier > 10: # Na wszelki wypadek zabezpieczenie XD
-            rndmultiplier = 10.0
-        if rndmultiplier < 0:   
-            rndmultiplier = 0.1
-        stankonta = int(obj.get(str(ctx.message.author)))
-        stankonta = float(stankonta)
-        if bet > stankonta:
-            await ctx.send(f'Nie stać cie na to (ale zawsze jest {prefix}freekasa <:tf:805707103628951592>)')
-        elif bet < 1:
-            await ctx.send(f'Chciało sie pocheatować co <:tf:805707103628951592>')
-        elif multiplier <= rndmultiplier:
-            win = int(bet*multiplier)
-            stankonta = int(stankonta)
-            obj.update({str(ctx.message.author):stankonta+win})           
-            embed=discord.Embed(title="Crash", description=f"Wygrałeś {round(bet*multiplier,1)}", color=0x00ff08)
-            embed.add_field(name="Crashed at:", value=f"{rndmultiplier}", inline=True)
-            embed.add_field(name="Twój mnożnik:", value=f"{multiplier}", inline=True)
-            embed.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
-            await ctx.send(embed=embed)
-        elif multiplier > rndmultiplier:
-            obj.update({str(ctx.message.author):stankonta-int(bet)})
-            embed=discord.Embed(title="Crash", description="Przegrałeś", color=0xff0000)
-            embed.add_field(name="Crashed at:", value=f"{rndmultiplier}", inline=True)
-            embed.add_field(name="Twój mnożnik:", value=f"{multiplier}", inline=True)
-            embed.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
-            await ctx.send(embed=embed)
-            if ctx.message.author.id != 252217902202093568:
-                stankonta1 = obj.get('sevu#0849')
-                obj.update({'sevu#0849':stankonta1+int(bet/8)+1})
-        with open('./datafiles/balance.json','w') as balances:
-            json.dump(obj, balances)
-        balances.close()
-        
 
-    # @commands.command(brief="‎top 5 gambling addictów")
-    # async def members(self,ctx):
-    #     member_list = ''
-    #     for member in ctx.message.guild.members:
-    #         member_list += member.name
-    #     print(member_list)
+        if multiplier > 10:
+            await ctx.send(f'Maksymalny mnożnik to 10')
+
+        else:
+            with open('./datafiles/balance.json', encoding='utf-8') as json_file:
+                obj = json.load(json_file)
+            a=1
+            b=250
+            rndmultiplier = min(random.randint(a, b),random.randint(a, b),random.randint(a, b),random.randint(a, b), random.randint(a, b),random.randint(a, b),random.randint(a, b),random.randint(a, b))/10
+
+            if rndmultiplier > 10: # Na wszelki wypadek zabezpieczenie XD
+                rndmultiplier = 10.0
+            if rndmultiplier < 0:
+                rndmultiplier = 0.1
+            stankonta = int(obj.get(str(ctx.message.author)))
+            stankonta = float(stankonta)
+            if bet > stankonta:
+                await ctx.send(f'Nie stać cie na to (ale zawsze jest {prefix}freekasa <:tf:805707103628951592>)')
+            elif bet < 1:
+                await ctx.send(f'Chciało sie pocheatować co <:tf:805707103628951592>')
+            elif multiplier <= rndmultiplier:
+                win = int(bet*multiplier)
+                stankonta = int(stankonta)
+                obj.update({str(ctx.message.author):stankonta+win})
+                embed=discord.Embed(title="Crash", description=f"Wygrałeś {round(bet*multiplier,1)}", color=0x00ff08)
+                embed.add_field(name="Crashed at:", value=f"{rndmultiplier}", inline=True)
+                embed.add_field(name="Twój mnożnik:", value=f"{multiplier}", inline=True)
+                embed.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
+                await ctx.send(embed=embed)
+            elif multiplier > rndmultiplier:
+                obj.update({str(ctx.message.author):stankonta-int(bet)})
+                embed=discord.Embed(title="Crash", description="Przegrałeś", color=0xff0000)
+                embed.add_field(name="Crashed at:", value=f"{rndmultiplier}", inline=True)
+                embed.add_field(name="Twój mnożnik:", value=f"{multiplier}", inline=True)
+                embed.set_footer(text=f"stan konta: {obj.get(str(ctx.message.author))}")
+                await ctx.send(embed=embed)
+            with open('./datafiles/balance.json','w') as balances:
+                json.dump(obj, balances)
+            balances.close()
+
 
     @commands.command(brief="‎top 5 gambling addictów")
     async def balancetop(self,ctx):
@@ -220,6 +210,8 @@ class Casino(commands.Cog):
             num += 1
         await ctx.send(embed=embed)
 
+
+
     @commands.command(brief="")
     async def balance(self,ctx):
         with open('./datafiles/balance.json', encoding='utf-8') as json_file:
@@ -229,6 +221,8 @@ class Casino(commands.Cog):
             await ctx.send(f"Stan konta {ctx.message.mentions[0]}: {obj.get(str(ctx.message.mentions[0]))}")
         else:
             await ctx.send(f"Twój stan konta: {obj.get(str(ctx.message.author))}")
+
+
         
     @commands.command(brief="przelew oznaczonej osobie")
     async def przelew(self,ctx, amount=1):
@@ -247,6 +241,8 @@ class Casino(commands.Cog):
                 json.dump(obj, balances)
             balances.close()    
             await ctx.send(f"Przelano {amount} użytkownikowi {ctx.message.mentions[0]}")
+
+
 
     @commands.command(brief="tu sie kupuje")
     async def sklep(self,ctx, option=''):
@@ -305,6 +301,7 @@ class Casino(commands.Cog):
         balances.close()
 
 
+
     @commands.command(brief="free kasa wtf?")
     async def freekasa(self,ctx):
         with open('./datafiles/balance.json', encoding='utf-8') as json_file:
@@ -317,6 +314,7 @@ class Casino(commands.Cog):
                 json.dump(obj, balances)
         balances.close()
         
+
 
 def setup(client):
     client.add_cog(Casino(client))
