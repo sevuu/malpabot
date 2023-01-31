@@ -59,27 +59,30 @@ class Fun(commands.Cog):
 
     @commands.command(brief="Randomowa stronka nhentai :D")
     async def nhentai(self,ctx):
-        FBI = True
-        while FBI:
-            id = random.randint(1,439759)
-            source = requests.get(f'https://nhentai-net.translate.goog/g/{id}/?_x_tr_sl=auto&_x_tr_tl=pl&_x_tr_hl=pl&_x_tr_pto=wapp').text
-            soup = BeautifulSoup(source, features="html.parser")
-            title = soup.find("meta", attrs={'itemprop': 'name'})
-            image = soup.find("meta", attrs={'itemprop': 'image'})
-            tags = soup.find("meta", attrs={'name': 'twitter:description'})
+        id = random.randint(1,439759)
+        source = requests.get(f'https://nhentai-net.translate.goog/g/{id}/?_x_tr_sl=auto&_x_tr_tl=pl&_x_tr_hl=pl&_x_tr_pto=wapp').text
+        soup = BeautifulSoup(source, features="html.parser")
 
-            tagslist = tags["content"].split(', ')
-            blacklist = []
+        title = soup.find("meta", attrs={'itemprop': 'name'})
+        image = soup.find("meta", attrs={'itemprop': 'image'})
+        tags = soup.find("meta", attrs={'name': 'twitter:description'})
+     
+        titlec = title["content"]
+        tagsc = tags["content"]
 
-            check = any(item in tagslist for item in blacklist)
-            if check is False:
-                embed=discord.Embed(title=title["content"] if title is not None else "Brak tytułu", url=f'https://nhentai.net/g/{id}')
-                embed.set_thumbnail(url=image["content"])
-                embed.add_field(name="Tagi: ", value=tags["content"] if tags is not None else "Brak tagów", inline=False)
-                await ctx.send(embed=embed)
-                FBI = False
-            else:
-                continue
+        tagslist = tags["content"].split(', ')
+        blacklist = ["lolicon","shotacon","rape"]
+
+        check = any(item in tagslist for item in blacklist)
+        if check is False:
+            embed=discord.Embed(title=titlec if title is not None else "Brak tytułu", url=f'https://nhentai.net/g/{id}',color=0xf22653)
+            embed.set_thumbnail(url=image["content"])
+            embed.add_field(name="Tagi: ", value=tagsc if tags is not None else "Brak tagów", inline=False)
+            await ctx.send(embed=embed)
+        else:
+            embed=discord.Embed(title=f"||{titlec}||" if title is not None else "Brak tytułu", url=f'https://nhentai.net/g/{id}',color=0xf22653)
+            embed.add_field(name="Tagi (:face_with_raised_eyebrow:): ", value=f"||{tagsc}||" if tags is not None else "Brak tagów", inline=False)
+            await ctx.send(embed=embed)
 
     @commands.command(brief="małpa w losowym języku")
     async def rndmalpa(self,ctx):
