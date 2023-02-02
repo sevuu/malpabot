@@ -1,6 +1,4 @@
 import discord, random, asyncio,os
-from discord.player import FFmpegOpusAudio
-import youtube_dl
 from discord import message
 from discord.ext import commands
 from discord.ext.commands import has_permissions
@@ -69,6 +67,10 @@ class Utility(commands.Cog):
 #        embed.set_image(url = user.avatar_url)
 #        await ctx.send(embed=embed)
 
+    @commands.command(brief="dm po id")
+    async def dm(self,ctx,user:discord.Member,*,msg=':)'):
+        await user.send(msg)
+
     @commands.command(brief = f"Ankieta")
     async def poll(self,ctx, a, b=None, c=None, d=None, e=None, f=None):
         emojis = ['\U0001F1E6']
@@ -113,6 +115,37 @@ class Utility(commands.Cog):
     @commands.command(brief="Losuje randomową liczbę w wybranym zakresie")
     async def roll(self,ctx,a,b):
         await ctx.send(str(random.randint(int(a),int(b))))
+        
+    @commands.command(brief="")
+    async def randlist(self,ctx,a,b,c):
+        list = []
+        for i in range(int(c)):
+            list.append(random.randint(int(a),int(b)))
+            i += 1
+        liststr = str(list)
+        if len(liststr) > 1999:
+            await ctx.send('za długie')
+        else:
+            await ctx.send(f"{liststr}")
+
+
+    @commands.command(brief="")
+    async def randomrandlist(self,ctx):
+        list = []
+        Check = True
+        while Check:
+            a = random.randint(-9999999999999,9999999999999)
+            b = random.randint(a,a+99999999999999)
+            c = random.randint(0,99)
+            for i in range(int(c)):
+                list.append(random.randint(int(a),int(b)))
+                i += 1
+            liststr = str(list)
+            if len(liststr) < 1999:
+                Check = False
+                await ctx.send(f"{liststr}")
+            else:
+                continue
 
     @commands.command(brief="Usuwa x wiadomości")
     @has_permissions(manage_messages=True)
@@ -163,78 +196,7 @@ class Utility(commands.Cog):
     async def nick(self,ctx, member: discord.Member,*, nick):
         await member.edit(nick=nick)
         await ctx.send(f'Zmieniono nick {member} na: {member.mention} ')
-
-
-
-    # @commands.command()
-    # async def join(self, ctx):
-    #     if ctx.author.voice is None:
-    #         ctx.send("nigger ngigger niger")
-    #     voice_channel = ctx.author.voice.channel
-    #     if ctx.voice_client is None:
-    #         await voice_channel.connect()
-
-    # @commands.command()
-    # async def disconnect(self, ctx):
-    #     await ctx.voice_client.disconnect()
-
-    # @commands.command()
-    # async def play(self, ctx, url):
-    #     global queue
-    #     queue.append(url)
-    #     if ctx.author.voice is None:
-    #         ctx.send("wejdz na kanal moze najpierw")
-    #     elif 'http' not in url:
-    #         ctx.send('to nie link debilu')
-    #     else:
-    #         voice_channel = ctx.author.voice.channel
-    #         if ctx.voice_client is None:
-    #             await voice_channel.connect()
-    #         ctx.voice_client.stop()
-    #         FFMPEG_OPTIONS = {
-    #             "before_options":"-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5",
-    #             "options": "-vn"
-    #         }
-    #         YDL_OPTIONS = {"format":"bestaudio"}
-    #         vc = ctx.voice_client
-    #         while queue[0] != None:
-    #             try:
-    #                 with youtube_dl.YoutubeDL(YDL_OPTIONS) as ydl:
-    #                     info = ydl.extract_info(queue[0], download=False)
-    #                     url2 = info["formats"][0]["url"]
-    #                     source = await discord.FFmpegOpusAudio.from_probe(url2, **FFMPEG_OPTIONS)
-    #                     queue.pop(0)
-    #                     vc.play(source)
-    #             except:
-    #                 ctx.channel.send("cos sie zesralo")
-        
-    
-    # @commands.command()
-    # async def pause(self, ctx):
-    #     await ctx.send("pauza")
-    #     await ctx.voice_client.pause()
-        
-    # @commands.command()
-    # async def resume(self, ctx):
-    #     await ctx.send("wznowiono")
-    #     await ctx.voice_client.resume()
-        
-    
-    # @commands.command()
-    # async def skip(self, ctx):
-    #     await ctx.channel.send("skip")
-    #     await ctx.voice_client.stop()
-
-    # @commands.command()
-    # async def loop(self, ctx):
-    #     await ctx.channel.send("skip")
-    #     await ctx.voice_client.stop()
-        
-    
-        
-
-    
-            
+           
 
 async def setup(client):
     await client.add_cog(Utility(client))

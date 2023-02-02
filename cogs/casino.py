@@ -1,4 +1,4 @@
-import discord, random, asyncio, os, numpy, json
+import discord, random, asyncio, json
 from discord.ext import commands
 
 

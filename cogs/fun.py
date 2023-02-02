@@ -150,7 +150,6 @@ class Fun(commands.Cog):
             await asyncio.sleep(0.8)
 
 
- 
     @commands.command(brief = "Wynik z dodawania")
     async def sum(self,ctx, x, y):
         try:
