@@ -1,10 +1,11 @@
-import discord, random, asyncio, os, requests
+import discord, random, asyncio, os, requests, interactions
 from discord.ext import commands
 from bs4 import BeautifulSoup
 from lib import caesarcipher, monkies, morsecode
 
 prefix = '%'
-client = commands.Bot(command_prefix = prefix)
+intents = discord.Intents.all()
+client = commands.Bot(command_prefix = prefix, intents=intents)
 
 class Fun(commands.Cog):
 
@@ -71,7 +72,7 @@ class Fun(commands.Cog):
         tagsc = tags["content"]
 
         tagslist = tags["content"].split(', ')
-        blacklist = ["lolicon","shotacon","rape"]
+        blacklist = ["lolicon","shotacon","rape", "incest"]
 
         check = any(item in tagslist for item in blacklist)
         if check is False:
@@ -181,7 +182,7 @@ class Fun(commands.Cog):
 
     @commands.command(brief="‎")
     async def nic(self,ctx):
-        await ctx.send('‎\n'*50)
+        await ctx.send('‎\n'*100)
 
 
     @commands.command(brief = "Wojtek of the wisdom")
@@ -209,7 +210,6 @@ class Fun(commands.Cog):
     async def zagus(self,ctx):
         await ctx.channel.send(f':grinning: :right_facing_fist: :woman_red_haired:')
 
-
     @commands.command(brief = "Losowa piosenka hatsune michael")
     async def miku(self,ctx):
         f = open('./datafiles/miku.txt',encoding='utf-8')
@@ -217,5 +217,5 @@ class Fun(commands.Cog):
         randommikusong = random.randint(0,len(mikusongs)-1)
         await ctx.send(mikusongs[randommikusong])
 
-def setup(client):
-    client.add_cog(Fun(client))
+async def setup(client):
+    await client.add_cog(Fun(client))

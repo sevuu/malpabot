@@ -1,12 +1,13 @@
-import random
+import random, discord
 from discord.ext import commands
 from discord.ext import commands, tasks
 
 
 
 prefix = '%'
-client = commands.Bot(command_prefix = prefix)
-
+intents = discord.Intents.all()
+intents.members = True
+client = commands.Bot(command_prefix = prefix, intents=intents)
 class Loops(commands.Cog):
 
     def __init__(self,client):
@@ -38,5 +39,5 @@ class Loops(commands.Cog):
         await ctx.send(slimakhuj[randomslimak])
 
 
-def setup(client):
-    client.add_cog(Loops(client))
+async def setup(client):
+    await client.add_cog(Loops(client))

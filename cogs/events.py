@@ -1,9 +1,13 @@
+import discord
 from discord.ext import commands
 
+prefix = '%'
+intents = discord.Intents.all()
+client = commands.Bot(command_prefix = prefix, intents=intents)
+
 class events(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-        self._last_member = None
+    def __init__(self,client):
+        self.client = client
 
 
 
@@ -32,5 +36,5 @@ class events(commands.Cog):
             await message.author.kick()
             await self.process_commands(message)
 
-def setup(bot):
-    bot.add_cog(events(bot))
+async def setup(bot):
+    await bot.add_cog(events(bot))
