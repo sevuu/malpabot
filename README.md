@@ -15,6 +15,3 @@ Utwórz plik **bottoken.py** w folderze **lib** i wpisz
 Jak coś nie działa na raspberry pi to to powinno pomóc:    
 `sudo apt-get install libatlas-base-dev`
 
-
-# additional notes
-to moje pierwsze "powazne" github repo dlatego chcialbym prosic o wyrozumialosc jak cos zle zrobie czy cos nie wiem
