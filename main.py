@@ -16,6 +16,9 @@ async def on_ready():
     
     await channel.send("Dziala")
 
+
+discord.utils.setup_logging()
+
 @client.command()
 async def load(ctx,extension):
     await client.load_extension(f'cogs.{extension}')

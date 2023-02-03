@@ -5,6 +5,7 @@ from discord.ext.commands import has_permissions
 from translate import Translator
 
 
+
 prefix = '%'
 
 
@@ -12,6 +13,7 @@ class Utility(commands.Cog):
 
     def __init__(self,client):
         self.client = client
+
 
     @commands.command(brief = "Pong")
     async def ping(self,ctx):
@@ -34,7 +36,6 @@ class Utility(commands.Cog):
             embed.add_field(name="Role:", value=str(", ".join(role)), inline=False)
             embed.set_footer(text="ID: "+str(ctx.message.mentions[0].id))
             await ctx.send(embed=embed)
-
         else:
             embed=discord.Embed(title="Twój profil", color=0xFF5733)
             embed.set_image(url = ctx.message.author.avatar_url)
@@ -49,6 +50,8 @@ class Utility(commands.Cog):
             embed.add_field(name="Role:", value=str(", ".join(role)), inline=False)
             embed.set_footer(text="ID: "+str(ctx.message.author.id))
             await ctx.send(embed=embed)
+
+
     @commands.command(brief = f"Twój avatar (bezużyteczne bo {prefix}id istnieje)")
     async def avatar(self,ctx):
         if len(ctx.message.mentions)>0:
@@ -60,16 +63,11 @@ class Utility(commands.Cog):
             embed.set_image(url = ctx.author.avatar_url)
             await ctx.send(embed=embed)
 
-#    @client.command(brief = f"Avatar ale wpisujesz id i tlye w sumie xd")
-#    async def avatarid(self,ctx, id):
-#        user = await client.fetch_user(id)
-#        embed=discord.Embed(title='', color=0xFF5733)
-#        embed.set_image(url = user.avatar_url)
-#        await ctx.send(embed=embed)
 
     @commands.command(brief="dm po id")
     async def dm(self,ctx,user:discord.Member,*,msg=':)'):
         await user.send(msg)
+
 
     @commands.command(brief = f"Ankieta")
     async def poll(self,ctx, a, b=None, c=None, d=None, e=None, f=None):
@@ -112,10 +110,12 @@ class Utility(commands.Cog):
             await message.Message.add_reaction(msg, emoji)
             await asyncio.sleep(0.5)
 
+
     @commands.command(brief="Losuje randomową liczbę w wybranym zakresie")
     async def roll(self,ctx,a,b):
         await ctx.send(str(random.randint(int(a),int(b))))
-        
+
+
     @commands.command(brief="")
     async def randlist(self,ctx,a,b,c):
         list = []
@@ -147,6 +147,7 @@ class Utility(commands.Cog):
             else:
                 continue
 
+
     @commands.command(brief="Usuwa x wiadomości")
     @has_permissions(manage_messages=True)
     async def clear(self,ctx,amount=1):
@@ -158,19 +159,23 @@ class Utility(commands.Cog):
         else:
             ctx.channel.send("nie jestes dababy pierdol sei")
 
+
     @commands.command(brief="wolny ram")
     async def freem(self,ctx):
         myCmd = os.popen(f'free -h -m').read()
         await ctx.send(f'```{myCmd}```')
+
 
     @commands.command(brief="host info")
     async def hostinfo(self,ctx):
         myCmd = int(os.popen('cat /sys/class/thermal/thermal_zone0/temp').read())
         await ctx.send(f'CPU temp: {myCmd/1000} °C')
 
+
     @commands.command(brief="link do bota")
     async def invite(self,ctx):
-        await ctx.send('‎https://discord.com/oauth2/authorize?client_id=811696300285362207&scope=bot&permissions=8')
+        await ctx.send('https://discord.com/oauth2/authorize?client_id=811696300285362207&scope=bot&permissions=8')
+
 
     @commands.command(brief="Status komend używających plików")
     async def filestatus(self,ctx):
@@ -182,6 +187,7 @@ class Utility(commands.Cog):
         f2.close()
         await ctx.channel.send(f'iq: {content}; starzy: {content2}')
 
+
     @commands.command(brief=f"Translator (Lista kodów: https://is.gd/VwiXUH)")
     async def translate(self,ctx,fromlang,tolang,*,text):
         translator= Translator(to_lang=tolang, from_lang=fromlang)
@@ -192,11 +198,12 @@ class Utility(commands.Cog):
         embed.add_field(name=f"{tolang}".upper(), value=f"{translation}", inline=True)
         await ctx.send(embed=embed)
 
+
     @commands.command(brief='Zmienia nick czy cos idk')
     async def nick(self,ctx, member: discord.Member,*, nick):
         await member.edit(nick=nick)
         await ctx.send(f'Zmieniono nick {member} na: {member.mention} ')
-           
+
 
 async def setup(client):
     await client.add_cog(Utility(client))

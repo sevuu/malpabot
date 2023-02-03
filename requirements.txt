@@ -1,6 +1,5 @@
 beautifulsoup4==4.11.2
 discord.py==2.1.0
-numpy==1.24.1
 requests==2.27.1
 translate==3.6.1
-youtube_dl==2021.12.17
+yt_dlp==2023.1.6

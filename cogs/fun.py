@@ -1,4 +1,4 @@
-import discord, random, asyncio, os, requests, interactions
+import discord, random, asyncio, os, requests
 from discord.ext import commands
 from bs4 import BeautifulSoup
 from lib import caesarcipher, monkies, morsecode
